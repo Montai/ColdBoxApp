@@ -104,5 +104,5 @@
 			<cfoutput>#isValid#</cfoutput>
 		</cfif>
 	</cfif>
-<!--- 	<script src = "../assets/js/validateRegistrationForm.js"></script> --->
+	<script src = "../includes/js/validateRegistrationForm.js"></script>
 </body>
