@@ -26,8 +26,8 @@ component accessors="true"{
 			variables.myQueryResult = new Query();
 			variables.myQueryResult.setDatasource("cfartgallery");
 			variables.myQueryResult.setSQL("SELECT PASSWORD, SALT
-							  FROM Users
-							  WHERE EMAILID = :currentUserEmail");
+								FROM Users
+								WHERE EMAILID = :currentUserEmail");
 			variables.myQueryResult.addParam(name: "currentUserEmail", value: "#arguments.email#", cfsqltype: "CF_SQL_VARCHAR");
 			variables.getQueryResult = variables.myQueryResult.execute();
 			if(variables.getQueryResult.RecordCount EQ 1) {
@@ -42,5 +42,4 @@ component accessors="true"{
 		}
 	}
 	
-
 }
