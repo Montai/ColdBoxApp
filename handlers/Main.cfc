@@ -14,7 +14,7 @@
 	/************************************** IMPLICIT ACTIONS *********************************************/
 
 	function onAppInit(event,rc,prc){
-
+		
 	}
 
 	function onRequestStart(event,rc,prc){

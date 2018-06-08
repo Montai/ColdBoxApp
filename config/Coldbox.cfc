@@ -6,7 +6,7 @@
 		// coldbox directives
 		coldbox = {
 			//Application Setup
-			appName 				= "Your app name here",
+			appName 				= "BasicAuthenticationPage",
 			eventName 				= "event",
 
 			//Development Settings
