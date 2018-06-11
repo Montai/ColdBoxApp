@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-<!--- 	<link rel="stylesheet" href = "../assets/css/form_style.css"> --->
+ 	<link rel="stylesheet" href = "../includes/css/form_style.css">
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body>
@@ -43,7 +43,7 @@
 				<tr>
 					<div class = "field">
 					<td>Date of birth:</td>
-						<td><cfinput type = "datefield" name = "birthDate" class = "input-field" id = "birthDate"></td>
+						<td><input type = "date" name = "birthDate" class = "input-field" id = "birthDate"></td>
 					<td><div class = "errorfield" id = "dateOfBirthError"></div></td>
 					</div>
 				</tr>
@@ -87,7 +87,7 @@
 				</tr>
 			</table>
 		</cfform>
-		<a href = "LoginPage.cfm">Click here to login</a>
+		<a href = "../layouts/Main.cfm">Click here to login</a>
 	</div>
 
 		<cfif isDefined("form.saveChanges") >
@@ -96,7 +96,7 @@
 			<cfif isValid EQ "true">
 				<cfset formDataInserted = formData.insertDataRegistrationForm(argumentCollection="form")>
 				<cfif formDataInserted EQ true>
-					<cflocation url = "LoginPage.cfm" addtoken = "false">
+					<cflocation url = "../layouts/Main.cfm" addtoken = "false">
 				<cfelse>
 					<h5>Opps! Please check all the fields</h5>
 			</cfif>

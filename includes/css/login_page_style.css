@@ -1,0 +1,51 @@
+.formcontainer {
+    position: relative;
+    left: 15%;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 3%;
+    margin: 3%;
+    width: 40%;
+    height: 250px;
+    background-color: rgb(201, 239, 252);
+}
+td {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+}
+.input-field {
+    width: 200px;
+    padding: 10px;
+    border-radius: 2px;
+    border: 2px solid skyblue;
+}
+.errorfield {
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 10px;
+}
+.form-submit-button {
+    background: rgb(89, 162, 221);
+    color: #fff;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #eee;   
+    text-shadow: none;
+    width: 100px;
+    height: 40px;
+    position: relative;
+    left: 230px;
+}
+div {
+    padding: 2%;
+}
+.form-submit-button:hover {
+    background: #016ABC;
+    color: #fff;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #eee;
+    text-shadow: none;
+}

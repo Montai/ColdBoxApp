@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-	<link rel = "stylesheet" href = "../assets/css/login_page_style.css"/>
+	<link rel = "stylesheet" href = "../includes/css/login_page_style.css"/>
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel = "stylesheet">
 </head>
 <body>
