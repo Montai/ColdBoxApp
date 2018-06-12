@@ -87,16 +87,16 @@
 				</tr>
 			</table>
 		</cfform>
-		<a href = "../layouts/Main.cfm">Click here to login</a>
+		<a href = "../views/LoginPage.cfm">Click here to login</a>
 	</div>
 
 		<cfif isDefined("form.saveChanges") >
-			<cfset formData = CreateObject("Component", "Models.RegistrationPageAction") >
+			<cfset formData = CreateObject("Component", "Model.RegistrationPageAction") >
 			<cfset isValid = formData.validateRegistrationForm()>
 			<cfif isValid EQ "true">
 				<cfset formDataInserted = formData.insertDataRegistrationForm(argumentCollection="form")>
 				<cfif formDataInserted EQ true>
-					<cflocation url = "../layouts/Main.cfm" addtoken = "false">
+					<cflocation url = "../views/LoginPageAction.cfm" addtoken = "false">
 				<cfelse>
 					<h5>Opps! Please check all the fields</h5>
 			</cfif>

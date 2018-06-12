@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <head>
-	<!--- <link rel = "stylesheet" href = "../assets/css/login_page_style.css"/> --->
+	<link rel = "stylesheet" href = "../includes/css/login_page_style.css"/>
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel = "stylesheet">
-	<link rel="stylesheet" href = "../includes/css/form_style.css">
 </head>
 <body>
 	<div class = "formcontainer">
@@ -32,7 +31,7 @@
 	</div>
 
 	<cfif isDefined("form.submit")>
-		<cfset formData = CreateObject("Component", "Models.LoginPageAction") />
+		<cfset formData = CreateObject("Component", "Model.LoginPageAction") />
 		<cfset validationStatus = formData.ValidateLoginForm(email = "#form.emailId#", password = "#form.password#") />
 			<cfif validationStatus EQ true>
 				<cfset userFormData = formData.CheckFormData(email = "#form.emailId#", password = "#form.password#") />
@@ -42,9 +41,9 @@
 				<cfelse>
 					<h5>Opps! Email or Password is incorrect, Please provide the correct details</h5>
 					<h6>New User?</h6>
-					<a href = "RegistrationPage.cfm">Click here to go to the registation page</a>
+					<a href = "../ColdBoxApp/views/RegistrationPage.cfm">Click here to go to the registation page</a>
 					<h6>Click here to Login</h6>
-					<a href = "LoginPage.cfm">Click here to login</a>
+					<a href = "../ColdBoxApp/views/LoginPage.cfm">Click here to login</a>
 				</cfif>
 			<cfelse>
 				<cfoutput>Validation Failure</cfoutput>

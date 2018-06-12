@@ -9,6 +9,8 @@ component{
 	this.sessionManagement = true;
 	this.sessionTimeout = createTimeSpan(0,0,30,0);
 	this.setClientCookies = true;
+	this.datasource = "cfartgallery";
+	this.mappings[ '/coldbox' ] = 'D:/MyCodings/Coding1/ColdBoxApp/coldbox/';
 
 	// Java Integration
 	this.javaSettings = { 
@@ -56,6 +58,10 @@ component{
 
 	public boolean function onMissingTemplate( template ){
 		return application.cbBootstrap.onMissingTemplate( argumentCollection=arguments );
+	}
+	
+	function onError( any Exception, string EventName ) {
+	WRITEDUMP(ARGUMENTS); abort;
 	}
 
 }

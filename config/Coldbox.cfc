@@ -14,17 +14,17 @@
 			handlersIndexAutoReload = true,
 
 			//Implicit Events
-			defaultEvent			= "Main.index",
-			requestStartHandler		= "Main.onRequestStart",
+			defaultEvent			= "Common.Login",
+		//	requestStartHandler		= "Main.onRequestStart",
 			requestEndHandler		= "",
-			applicationStartHandler = "Main.onAppInit",
+		//	applicationStartHandler = "Main.onAppInit",
 			applicationEndHandler	= "",
 			sessionStartHandler 	= "",
 			sessionEndHandler		= "",
 			missingTemplateHandler	= "",
 
 			//Extension Points
-			applicationHelper 			= "includes/helpers/ApplicationHelper.cfm",
+			//applicationHelper 			= "includes/helpers/ApplicationHelper.cfm",
 			viewsHelper					= "",
 			modulesExternalLocation		= [],
 			viewsExternalLocation		= "",
@@ -35,7 +35,7 @@
 
 			//Error/Exception Handling
 			invalidHTTPMethodHandler 	= "",
-			exceptionHandler			= "main.onException",
+		//	exceptionHandler			= "main.onException",
 			invalidEventHandler			= "",
 			customErrorTemplate			= "",
 
@@ -96,43 +96,6 @@
 			 properties={}
 			}
 		];
-
-		/*
-		// module setting overrides
-		moduleSettings = {
-			moduleName = {
-				settingName = "overrideValue"
-			}
-		};
-
-		// flash scope configuration
-		flash = {
-			scope = "session,client,cluster,ColdboxCache,or full path",
-			properties = {}, // constructor properties for the flash scope implementation
-			inflateToRC = true, // automatically inflate flash data into the RC scope
-			inflateToPRC = false, // automatically inflate flash data into the PRC scope
-			autoPurge = true, // automatically purge flash data for you
-			autoSave = true // automatically save flash scopes at end of a request and on relocations.
-		};
-
-		//Register Layouts
-		layouts = [
-			{ name = "login",
-		 	  file = "Layout.tester.cfm",
-			  views = "vwLogin,test",
-			  folders = "tags,pdf/single"
-			}
-		];
-
-		//Conventions
-		conventions = {
-			handlersLocation = "handlers",
-			viewsLocation 	 = "views",
-			layoutsLocation  = "layouts",
-			modelsLocation 	 = "models",
-			eventAction 	 = "index"
-		};
-		*/
 
 	}
 

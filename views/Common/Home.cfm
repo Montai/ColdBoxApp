@@ -4,12 +4,12 @@
 		<title>Home Page</title>
 		<meta charset = "utf-8" />
 		<meta name = "viewport" content = "width=device-width, initial-scale=1" />
-		<link rel = "stylesheet" href = "../assets/css/main.css" />
-        <link rel = "stylesheet" href = "../assets/css/topnav.css"/>
+		<link rel = "stylesheet" href = "../includes/css/main.css" />
+        <link rel = "stylesheet" href = "../includes/css/topnav.css"/>
 	</head>
 	<body>
         <div class = "topnav">
-            <a href = "LoginPage.cfm" onclick="return confirm('Are you sure?')">Log Out</a>
+            <a href = "LoginPage.cfm" onclick = "return confirm('Are you sure?')">Log Out</a>
             <a href = "AboutPage.cfm">About Page</a>
         </div>
 		<!-- Wrapper -->
@@ -83,9 +83,9 @@
 			</div>
 
 		<!-- Scripts -->
-			<script src="../assets/js/jquery.min.js"></script>
-			<script src="../assets/js/jquery.poptrox.min.js"></script>
-			<script src="../assets/js/skel.min.js"></script>
-			<script src="../assets/js/main.js"></script>
+			<script src="../includes/js/jquery.min.js"></script>
+			<script src="../includes/js/jquery.poptrox.min.js"></script>
+			<script src="../includes/js/skel.min.js"></script>
+			<script src="../includes/js/main.js"></script>
 	</body>
 </html>
