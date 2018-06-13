@@ -26,7 +26,7 @@
 			},
 			
 			// Package scan locations
-			scanLocations = [],
+			scanLocations = ["models"],
 			
 			// Stop Recursions
 			stopRecursions = [],
@@ -41,6 +41,9 @@
 		};
 		
 		// Map Bindings below
+		map("Login").to("models.Common.LoginPageAction");
+		map("Register").to("models.Common.RegistrationPageAction");
+		mapDirectory("models.Common");
 	}	
 
 }

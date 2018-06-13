@@ -87,7 +87,7 @@
 				</tr>
 			</table>
 		</cfform>
-		<a href = "../views/LoginPage.cfm">Click here to login</a>
+		<a href = "../Common/Login.cfm">Click here to login</a>
 	</div>
 
 		<cfif isDefined("form.saveChanges") >

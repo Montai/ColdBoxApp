@@ -22,10 +22,12 @@
     },
     "installPaths":{
         "coldbox":"coldbox",
-        "testbox":"testbox"
+        "testbox":"testbox",
+        "wirebox":"wirebox"
     },
     "dependencies":{
-        "coldbox":"5.0.0"
+        "coldbox":"5.0.0",
+        "wirebox":"^5.0.0+633"
     },
     "scripts":{
         "postVersion":"package set location='https://github.com/coldbox-templates/advanced-script/archive/v`package version`.zip'",

@@ -1,8 +1,8 @@
 /**
 * I am a new handler
 */
-component displayname="Common" hint="" extends="coldbox.system.EventHandler"{
-	
+component name="Common" hint="" extends="coldbox.system.EventHandler"{
+	property name = "loginService" inject = "Login";
 	// OPTIONAL HANDLER PROPERTIES
 	this.prehandler_only 	= "";
 	this.prehandler_except 	= "";
@@ -39,6 +39,31 @@ component displayname="Common" hint="" extends="coldbox.system.EventHandler"{
 	}
 
 	/**
+	* loginaction
+	*/
+	public void function LoginAction( event, rc, prc ){
+		// writedump(form); 
+		// writedump(Login);
+		// abort;
+		if(isDefined("form.submit")) {
+			myModel = getModel("Common.LoginPageAction");
+			writedump(myModel);
+			abort;
+			local.validationStatus = myModel.ValidateLoginForm(form.emailId, form.password);
+			if(local.validationStatus EQ true) {
+				local.userFormData = myModel.CheckFormData(form.emailId, form.password);
+				if(local.userFormData EQ true) {
+					location("/Home", "false", "301");
+				} else {
+					//writeOutput("Opps! Email or Password is incorrect, Please provide the correct details");
+				}
+			}
+		} else {
+
+		}
+	}
+
+	/**
 	* Register
 	*/
 	public void function Register( event, rc, prc ){
@@ -72,6 +97,5 @@ component displayname="Common" hint="" extends="coldbox.system.EventHandler"{
 	public void function Logout( event, rc, prc ){
 		event.setView( "Common/LogOut" ).noLayout();
 	}
-
-	
 }
+

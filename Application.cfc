@@ -11,7 +11,7 @@ component{
 	this.setClientCookies = true;
 	this.datasource = "cfartgallery";
 	this.mappings[ '/coldbox' ] = 'D:/MyCodings/Coding1/ColdBoxApp/coldbox/';
-
+	//this.mappings[ '/coldbox' ] = 'D:\MyCodings\Coding1\ColdBoxApp\coldbox\';
 	// Java Integration
 	this.javaSettings = { 
 		loadPaths = [ ".\lib" ], 
@@ -32,6 +32,7 @@ component{
 	public boolean function onApplicationStart(){
 		application.cbBootstrap = new coldbox.system.Bootstrap( COLDBOX_CONFIG_FILE, COLDBOX_APP_ROOT_PATH, COLDBOX_APP_KEY, COLDBOX_APP_MAPPING );
 		application.cbBootstrap.loadColdbox();
+		wirebox = new wirebox.system.ioc.Injector();
 		return true;
 	}
 

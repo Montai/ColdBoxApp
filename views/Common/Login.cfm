@@ -7,7 +7,7 @@
 	<div class = "formcontainer">
 	<!--- Login form --->
 		<h5><u>Login</u></h5>
-		<cfform onsubmit = "return validateFormData()" method = "post">
+		<cfform onsubmit = "return validateFormData()" action="index.cfm/Common/LoginAction" method = "post" name="submit">
 			<table>
 				<tr>
 					<div class = "field">
@@ -30,29 +30,10 @@
 		</cfform>
 	</div>
 
-	<cfif isDefined("form.submit")>
-		<cfset formData = CreateObject("Component", "Model.LoginPageAction") />
-		<cfset validationStatus = formData.ValidateLoginForm(email = "#form.emailId#", password = "#form.password#") />
-			<cfif validationStatus EQ true>
-				<cfset userFormData = formData.CheckFormData(email = "#form.emailId#", password = "#form.password#") />
-
-				<cfif userFormData EQ true>
-					<cflocation url = "HomePage.cfm" addtoken = "false">
-				<cfelse>
-					<h5>Opps! Email or Password is incorrect, Please provide the correct details</h5>
-					<h6>New User?</h6>
-					<a href = "../ColdBoxApp/views/RegistrationPage.cfm">Click here to go to the registation page</a>
-					<h6>Click here to Login</h6>
-					<a href = "../ColdBoxApp/views/LoginPage.cfm">Click here to login</a>
-				</cfif>
-			<cfelse>
-				<cfoutput>Validation Failure</cfoutput>
-			</cfif>
-	</cfif>
 
 	<!---  Link to Signup page --->
 	<h4>New User?</h4>
-	<a href = "../views/RegistrationPage.cfm">Register Here</a>
+	<a href = "../Common/Register.cfm">Register Here</a>
 	<script src = "../includes/js/validateLoginPage.js"></script>
 
 </body>
