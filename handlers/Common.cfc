@@ -72,10 +72,11 @@ component name="Common" hint="" extends="coldbox.system.EventHandler"{
 	}
 
 	public void function RegisterAction(event, rc, prc) {
+		//writeDump(form); abort;
 		if(isDefined("form.saveChanges")) {
 			local.formData = getModel("Common.RegistrationPageAction");
-			local.isValid = formData.validateRegistrationForm()>
-			if(isValid EQ "true") {
+			local.isValid = formData.validateRegistrationForm();
+			if(local.isValid EQ "true") {
 				local.formDataInserted = formData.insertDataRegistrationForm(argumentCollection="form");
 				if(local.formDataInserted EQ true) {
 					location("../Common/Login");
@@ -85,6 +86,8 @@ component name="Common" hint="" extends="coldbox.system.EventHandler"{
 			} else {
 				location("../Common/Register");
 			}
+		} else {
+			location("../Common/Register","false","301");
 		}
 	}
 
