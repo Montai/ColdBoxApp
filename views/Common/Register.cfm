@@ -5,7 +5,7 @@
 </head>
 <body>
 	<div class = "formcontainer">
-		<cfform onsubmit = "return validateForm()" method = "post">
+		<cfform name = "registrationForm" onsubmit = "return validateForm()" method = "post">
 			<table>
 				<tr>
 					<div class = "field">

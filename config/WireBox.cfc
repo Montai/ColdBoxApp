@@ -43,7 +43,7 @@
 		// Map Bindings below
 		map("Login").to("models.Common.LoginPageAction");
 		map("Register").to("models.Common.RegistrationPageAction");
-		mapDirectory("models.Common");
+		//mapDirectory("models.Common");
 	}	
 
 }

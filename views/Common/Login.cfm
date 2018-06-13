@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-	<link rel = "stylesheet" href = "../includes/css/login_page_style.css"/>
+	<link rel = "stylesheet" href = "/coldboxapp/includes/css/login_page_style.css"/>
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel = "stylesheet">
 </head>
 <body>
@@ -33,8 +33,8 @@
 
 	<!---  Link to Signup page --->
 	<h4>New User?</h4>
-	<a href = "../Common/Register.cfm">Register Here</a>
-	<script src = "../includes/js/validateLoginPage.js"></script>
+	<a href = "../coldboxapp/index.cfm/Common/Register.cfm">Register Here</a>
+	<script src = "/coldboxapp/includes/js/validateLoginPage.js"></script>
 
 </body>
 </html>

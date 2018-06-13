@@ -12,7 +12,7 @@ component name="Common" hint="" extends="coldbox.system.EventHandler"{
 	this.aroundHandler_except = "";
 	// REST Allowed HTTP Methods Ex: this.allowedMethods = {delete='POST,DELETE',index='GET'}
 	this.allowedMethods = {};
-	
+
 	/**
 	IMPLICIT FUNCTIONS: Uncomment to use
 	function preHandler( event, rc, prc, action, eventArguments ){
@@ -30,11 +30,11 @@ component name="Common" hint="" extends="coldbox.system.EventHandler"{
 	function onInvalidHTTPMethod( event, rc, prc, faultAction, eventArguments ){
 	}
 	*/
-		
+
 	/**
 	* Login
 	*/
-	public void function Login( event, rc, prc ){
+	public void function Login( event, rc, prc ) {
 		event.setView( "Common/Login" ).noLayout();
 	}
 
@@ -42,24 +42,25 @@ component name="Common" hint="" extends="coldbox.system.EventHandler"{
 	* loginaction
 	*/
 	public void function LoginAction( event, rc, prc ){
-		// writedump(form); 
+		// writedump(form);
 		// writedump(Login);
 		// abort;
 		if(isDefined("form.submit")) {
 			myModel = getModel("Common.LoginPageAction");
-			writedump(myModel);
-			abort;
 			local.validationStatus = myModel.ValidateLoginForm(form.emailId, form.password);
+			//writedump(validationStatus);
+			//abort;
 			if(local.validationStatus EQ true) {
 				local.userFormData = myModel.CheckFormData(form.emailId, form.password);
 				if(local.userFormData EQ true) {
-					location("/Home", "false", "301");
+					location("../Common/Home", "false", "301");
 				} else {
 					//writeOutput("Opps! Email or Password is incorrect, Please provide the correct details");
+					location("../Common/Register","false","301");
 				}
 			}
 		} else {
-
+			location("../Common/Register","false","301");
 		}
 	}
 

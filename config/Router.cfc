@@ -4,7 +4,7 @@ component{
 		setFullRewrites( true );
 
 		route( ":handler/:action?" ).end();
-	//	route("/index").toView("views/LoginPage.cfm");
+		//route("/index").toView("views/Common/Login.cfm");
 	}
 
 }

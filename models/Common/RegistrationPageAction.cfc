@@ -5,7 +5,7 @@
 			FROM Users
 			WHERE EMAILID = '#form.emailId#'
 		</cfquery>
-		
+
 		<cfif not isValid("regex", form.firstName, "^[a-zA-Z]*$")>
 			<cfreturn "Invalid First Name">
 		<cfelseif form.MiddleName NEQ "" and not isValid("regex", form.middleName, "^[a-zA-Z]*$")>

@@ -20,7 +20,7 @@
 		<cfargument name = "password" type = "string" required = "true" />
 		<cftry>
 			<cfquery name = "request.getPwdAndSalt" datasource = "cfartgallery">
-				SELECT PASSWORD, SALT
+				SELECT PASSWORD, SALT, ID
 				FROM Users
 				WHERE EMAILID = <cfqueryparam cfsqltype = "cf_sql_varchar" value = "#arguments.email#">
 			</cfquery>
@@ -28,6 +28,8 @@
 			<!--- If the record exist in database --->
 			<cfif request.getPwdAndSalt.RecordCount EQ 1>
 				<cfif request.getPwdAndSalt.PASSWORD EQ Hash(arguments.password & request.getPwdAndSalt.SALT, "SHA-512")>
+					<!--- Setting user session --->
+					<cfset Session.user = request.getPwdAndSalt.ID >
 					<cfreturn true>
 				<cfelse>
 					<cfreturn false>
