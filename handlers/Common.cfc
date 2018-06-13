@@ -71,6 +71,23 @@ component name="Common" hint="" extends="coldbox.system.EventHandler"{
 		event.setView( "Common/Register" ).noLayout();
 	}
 
+	public void function RegisterAction(event, rc, prc) {
+		if(isDefined("form.saveChanges")) {
+			local.formData = getModel("Common.RegistrationPageAction");
+			local.isValid = formData.validateRegistrationForm()>
+			if(isValid EQ "true") {
+				local.formDataInserted = formData.insertDataRegistrationForm(argumentCollection="form");
+				if(local.formDataInserted EQ true) {
+					location("../Common/Login");
+				} else {
+					location("../Common/Register");
+				}
+			} else {
+				location("../Common/Register");
+			}
+		}
+	}
+
 	/**
 	* ForgotPassword
 	*/

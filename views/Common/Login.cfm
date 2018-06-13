@@ -33,7 +33,7 @@
 
 	<!---  Link to Signup page --->
 	<h4>New User?</h4>
-	<a href = "../coldboxapp/index.cfm/Common/Register.cfm">Register Here</a>
+	<a href = "../Common/Register.cfm">Register Here</a>
 	<script src = "/coldboxapp/includes/js/validateLoginPage.js"></script>
 
 </body>
