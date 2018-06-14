@@ -2,7 +2,7 @@
 * I am a new handler
 */
 component name="Common" hint="" extends="coldbox.system.EventHandler"{
-	property name = "Login" inject;
+	//property name = "Login" inject;
 	// OPTIONAL HANDLER PROPERTIES
 	this.prehandler_only 	= "";
 	this.prehandler_except 	= "";
@@ -46,6 +46,8 @@ component name="Common" hint="" extends="coldbox.system.EventHandler"{
 		// writedump(Login);
 		// abort;
 		if(isDefined("form.submit")) {
+			//local.myModel = injector.getInstance("model.Common.LoginPageAction");
+			//abort;
 			local.myModel = getModel("Common.LoginPageAction");
 			local.validationStatus = myModel.ValidateLoginForm(form.emailId, form.password);
 			//writedump(validationStatus);
@@ -54,14 +56,17 @@ component name="Common" hint="" extends="coldbox.system.EventHandler"{
 				local.userFormData = myModel.CheckFormData(form.emailId, form.password);
 				if(local.userFormData EQ true) {
 					//abort;
-					location("../../index.cfm/Common/Home", "false", "301");
+					//location("../../index.cfm/Common/Home");
+					event.setView("Common/Home").noLayout();
 				} else {
 					//writeOutput("Opps! Email or Password is incorrect, Please provide the correct details");
-					location("../../index.cfm/Common/Register","false","301");
+					event.setView("Common/Register").noLayout();
+					//location("../../index.cfm/Common/Register","false","301");
 				}
 			}
 		} else {
-			location("../../index.cfm/Common/Register","false","301");
+			event.setView("Common/Register").noLayout();
+			//location("../../index.cfm/Common/Register","false","301");
 		}
 	}
 

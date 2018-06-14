@@ -32,8 +32,6 @@ component{
 	public boolean function onApplicationStart(){
 		application.cbBootstrap = new coldbox.system.Bootstrap( COLDBOX_CONFIG_FILE, COLDBOX_APP_ROOT_PATH, COLDBOX_APP_KEY, COLDBOX_APP_MAPPING );
 		application.cbBootstrap.loadColdbox();
-		//wirebox = new wirebox.system.ioc.Injector();
-		wirebox = new wirebox.system.ioc.Injector();
 		return true;
 	}
 
@@ -49,7 +47,7 @@ component{
 		//writeDump(CGI); abort;
 		if(CGI.HTTP_URL EQ "/coldboxapp/index.cfm/Common/home") {
 			if(structKeyExists(session, "user")) {
-				//location("/coldboxapp/index.cfm/Common/home");
+				location("/coldboxapp/index.cfm/Common/home");
 			}
 			else {
 				location("/coldboxapp/index.cfm");
