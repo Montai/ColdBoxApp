@@ -4,13 +4,13 @@
 		<title>Home Page</title>
 		<meta charset = "utf-8" />
 		<meta name = "viewport" content = "width=device-width, initial-scale=1" />
-		<link rel = "stylesheet" href = "../includes/css/main.css" />
-        <link rel = "stylesheet" href = "../includes/css/topnav.css"/>
+		<link rel = "stylesheet" href = "../../includes/css/main.css" />
+        <link rel = "stylesheet" href = "../../includes/css/topnav.css"/>
 	</head>
 	<body>
         <div class = "topnav">
-            <a href = "LoginPage.cfm" onclick = "return confirm('Are you sure?')">Log Out</a>
-            <a href = "AboutPage.cfm">About Page</a>
+            <a href = "Logout.cfm" onclick = "return confirm('Are you sure?')">Log Out</a>
+            <a href = "About.cfm">About Page</a>
         </div>
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -38,36 +38,36 @@
 						<!-- Thumbnails -->
 							<section class="thumbnails">
 								<div>
-									<a href="../images/fulls/01.jpg">
-										<img src="../images/thumbs/01.jpg" alt="" />
+									<a href="../../includes/images/fulls/01.jpg">
+										<img src="../../includes/images/thumbs/01.jpg" alt="" />
 										<h3>Wallpaper1</h3>
 									</a>
-									<a href="../images/fulls/02.jpg">
-										<img src="../images/thumbs/02.jpg" alt="" />
+									<a href="../../includes/images/fulls/02.jpg">
+										<img src="../../includes/images/thumbs/02.jpg" alt="" />
 										<h3>Wallpaper2</h3>
 									</a>
 								</div>
 								<div>
-									<a href="../images/fulls/03.jpg">
-										<img src="../images/thumbs/03.jpg" alt="" />
+									<a href="../../includes/images/fulls/03.jpg">
+										<img src="../../includes/images/thumbs/03.jpg" alt="" />
 										<h3>Wallpaper3</h3>
 									</a>
-									<a href="../images/fulls/04.jpg">
-										<img src="../images/thumbs/04.jpg" alt="" />
+									<a href="../../includes/images/fulls/04.jpg">
+										<img src="../../includes/images/thumbs/04.jpg" alt="" />
 										<h3>Wallpaper4</h3>
 									</a>
-									<a href="../images/fulls/05.jpg">
-										<img src="../images/thumbs/05.jpg" alt="" />
+									<a href="../../includes/images/fulls/05.jpg">
+										<img src="../../includes/images/thumbs/05.jpg" alt="" />
 										<h3>Wallpaper5</h3>
 									</a>
 								</div>
 								<div>
-									<a href="../images/fulls/06.jpg">
-										<img src="../images/thumbs/06.jpg" alt="" />
+									<a href="../../includes/images/fulls/06.jpg">
+										<img src="../../includes/images/thumbs/06.jpg" alt="" />
 										<h3>Wallpaper6</h3>
 									</a>
-									<a href="../images/fulls/07.jpg">
-										<img src="../images/thumbs/07.jpg" alt="" />
+									<a href="../../includes/images/fulls/07.jpg">
+										<img src="../../includes/images/thumbs/07.jpg" alt="" />
 										<h3>Wallpaper7</h3>
 									</a>
 								</div>
@@ -83,9 +83,9 @@
 			</div>
 
 		<!-- Scripts -->
-			<script src="../includes/js/jquery.min.js"></script>
-			<script src="../includes/js/jquery.poptrox.min.js"></script>
-			<script src="../includes/js/skel.min.js"></script>
-			<script src="../includes/js/main.js"></script>
+			<script src="../../includes/js/jquery.min.js"></script>
+			<script src="../../includes/js/jquery.poptrox.min.js"></script>
+			<script src="../../includes/js/skel.min.js"></script>
+			<script src="../../includes/js/main.js"></script>
 	</body>
 </html>

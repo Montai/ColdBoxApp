@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
- 	<link rel="stylesheet" href = "../includes/css/form_style.css">
+ 	<link rel="stylesheet" href = "../../includes/css/form_style.css">
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body>
@@ -91,5 +91,5 @@
 	</div>
 
 		
-	<script src = "../includes/js/validateRegistrationForm.js"></script>
+	<script src = "../../includes/js/validateRegistrationForm.js"></script>
 </body>

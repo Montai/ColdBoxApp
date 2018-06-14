@@ -4,13 +4,13 @@
 		<title>About Page</title>
 		<meta charset = "utf-8" />
 		<meta name = "viewport" content = "width=device-width, initial-scale=1" />
-		<link rel = "stylesheet" href = "../assets/css/main.css" />
-        <link rel = "stylesheet" href = "../assets/css/topnav.css"/>
+		<link rel = "stylesheet" href = "../../includes/css/main.css" />
+        <link rel = "stylesheet" href = "../../includes/css/topnav.css"/>
 	</head>
 	<body>
         <div class = "topnav">
-            <a href = "LoginPage.cfm" onclick = "return confirm('Are you sure?')">Log Out</a>
-            <a href = "HomePage.cfm">Home Page</a>
+            <a href = "Login.cfm" onclick = "return confirm('Are you sure?')">Log Out</a>
+            <a href = "Home.cfm">Home Page</a>
         </div>
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -36,9 +36,9 @@
 			</div>
 
 		<!-- Scripts -->
-			<script src="../assets/js/jquery.min.js"></script>
-			<script src="../assets/js/jquery.poptrox.min.js"></script>
-			<script src="../assets/js/skel.min.js"></script>
-			<script src="../assets/js/main.js"></script>
+			<script src="../../includes/js/jquery.min.js"></script>
+			<script src="../../includes/js/jquery.poptrox.min.js"></script>
+			<script src="../../includes/js/skel.min.js"></script>
+			<script src="../../includes/js/main.js"></script>
 	</body>
 </html>

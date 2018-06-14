@@ -2,7 +2,7 @@
 * I am a new handler
 */
 component name="Common" hint="" extends="coldbox.system.EventHandler"{
-	property name = "loginService" inject = "Login";
+	property name = "Login" inject;
 	// OPTIONAL HANDLER PROPERTIES
 	this.prehandler_only 	= "";
 	this.prehandler_except 	= "";
@@ -46,21 +46,22 @@ component name="Common" hint="" extends="coldbox.system.EventHandler"{
 		// writedump(Login);
 		// abort;
 		if(isDefined("form.submit")) {
-			myModel = getModel("Common.LoginPageAction");
+			local.myModel = getModel("Common.LoginPageAction");
 			local.validationStatus = myModel.ValidateLoginForm(form.emailId, form.password);
 			//writedump(validationStatus);
 			//abort;
 			if(local.validationStatus EQ true) {
 				local.userFormData = myModel.CheckFormData(form.emailId, form.password);
 				if(local.userFormData EQ true) {
-					location("../Common/Home", "false", "301");
+					//abort;
+					location("../../index.cfm/Common/Home", "false", "301");
 				} else {
 					//writeOutput("Opps! Email or Password is incorrect, Please provide the correct details");
-					location("../Common/Register","false","301");
+					location("../../index.cfm/Common/Register","false","301");
 				}
 			}
 		} else {
-			location("../Common/Register","false","301");
+			location("../../index.cfm/Common/Register","false","301");
 		}
 	}
 
@@ -74,6 +75,8 @@ component name="Common" hint="" extends="coldbox.system.EventHandler"{
 	public void function RegisterAction(event, rc, prc) {
 		//writeDump(form); abort;
 		if(isDefined("form.saveChanges")) {
+			//local.formData = injector.getInstance("Common.RegistrationPageAction");
+			//abort;
 			local.formData = getModel("Common.RegistrationPageAction");
 			local.isValid = formData.validateRegistrationForm();
 			if(local.isValid EQ "true") {
