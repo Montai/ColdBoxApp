@@ -1,7 +1,7 @@
 /**
 * I am a new handler
 */
-component name="Common" hint="" extends="coldbox.system.EventHandler"{
+component name = "Common" hint = "Common Controller for handling basic operations" extends = "coldbox.system.EventHandler" {
 	//property name = "Login" inject;
 	// OPTIONAL HANDLER PROPERTIES
 	this.prehandler_only 	= "";
@@ -45,22 +45,28 @@ component name="Common" hint="" extends="coldbox.system.EventHandler"{
 		// writedump(form);
 		// writedump(Login);
 		// abort;
+		
 		if(isDefined("form.submit")) {
-			//local.myModel = injector.getInstance("model.Common.LoginPageAction");
-			//abort;
+			// local.myModel = getInstance("model.Common.LoginPageAction");
+			// abort;
 			local.myModel = getModel("Common.LoginPageAction");
 			local.validationStatus = myModel.ValidateLoginForm(form.emailId, form.password);
 			//writedump(validationStatus);
 			//abort;
 			if(local.validationStatus EQ true) {
 				local.userFormData = myModel.CheckFormData(form.emailId, form.password);
-				if(local.userFormData EQ true) {
+				if(local.userFormData EQ "true") {
 					//abort;
 					//location("../../index.cfm/Common/Home");
 					event.setView("Common/Home").noLayout();
 				} else {
 					//writeOutput("Opps! Email or Password is incorrect, Please provide the correct details");
-					event.setView("Common/Register").noLayout();
+					//writeDump(event);
+					//abort;
+					local.message = local.userFormData;
+					//writeDump(message); abort;
+					OnError(event, rc, prc, message);
+					//event.setView("Common/OnError").noLayout();
 					//location("../../index.cfm/Common/Register","false","301");
 				}
 			}
@@ -80,8 +86,6 @@ component name="Common" hint="" extends="coldbox.system.EventHandler"{
 	public void function RegisterAction(event, rc, prc) {
 		//writeDump(form); abort;
 		if(isDefined("form.saveChanges")) {
-			//local.formData = injector.getInstance("Common.RegistrationPageAction");
-			//abort;
 			local.formData = getModel("Common.RegistrationPageAction");
 			local.isValid = formData.validateRegistrationForm();
 			if(local.isValid EQ "true") {
@@ -92,39 +96,52 @@ component name="Common" hint="" extends="coldbox.system.EventHandler"{
 					location("../Common/Register");
 				}
 			} else {
-				location("../Common/Register");
+				local.message = local.isValid;
+				OnError(event, rc, prc, message);
+				//location("../Common/Register");
 			}
 		} else {
-			location("../Common/Register","false","301");
+			local.message = "Error in submitting form";
+			OnError(event, rc, prc, message);
 		}
 	}
 
 	/**
 	* ForgotPassword
 	*/
-	public void function ForgotPassword( event, rc, prc ){
+	public void function ForgotPassword( event, rc, prc ) {
 		event.setView( "Common/ForgotPassword" ).noLayout();
 	}
 
 	/**
 	* Home
 	*/
-	public void function Home( event, rc, prc ){
+	public void function Home( event, rc, prc ) {
 		event.setView( "Common/Home" ).noLayout();
 	}
 
 	/**
 	* About
 	*/
-	public void function About( event, rc, prc ){
+	public void function About( event, rc, prc ) {
 		event.setView( "Common/About" ).noLayout();
 	}
 
 	/**
 	* Logout
 	*/
-	public void function Logout( event, rc, prc ){
+	public void function Logout( event, rc, prc ) {
 		event.setView( "Common/LogOut" ).noLayout();
+	}
+
+	/**
+	* On Error method 
+	*/
+	public void function OnError(event, rc, prc, message) {
+		//writeDump(message); abort;
+		log.warn("#message#");
+		event.paramValue("error", message);
+		event.setView("Common/OnError").noLayout();
 	}
 }
 

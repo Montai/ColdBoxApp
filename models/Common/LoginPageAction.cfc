@@ -15,7 +15,7 @@
 		<cfreturn variables.flag>
 	</cffunction>
 
-	<cffunction name = "CheckFormData" returntype = "boolean" hint = "check the form data" output = "true">
+	<cffunction name = "CheckFormData" returntype = "string" hint = "check credentials" output = "false">
 		<cfargument name = "email" type = "string" required = "true" />
 		<cfargument name = "password" type = "string" required = "true" />
 		<cftry>
@@ -30,14 +30,17 @@
 				<cfif request.getPwdAndSalt.PASSWORD EQ Hash(arguments.password & request.getPwdAndSalt.SALT, "SHA-512")>
 					<!--- Setting user session --->
 					<cfset Session.user = request.getPwdAndSalt.ID >
-					<cfreturn true>
+					<cfreturn "true">
 				<cfelse>
-					<cfreturn false>
+					<cfreturn "false">
 				</cfif>
 			</cfif>
+			<cfif request.getPwdAndSalt.RecordCount NEQ 1>
+				<cfreturn "Invalid Email or Password">
+			</cfif>
 			<cfcatch type="any">
-				<cfoutput>Database exception occured</cfoutput>
-				<cfreturn false>
+				<!--- <cfoutput>Database exception occured</cfoutput> --->
+				<cfreturn "Opps, database exception occured">
 			</cfcatch>
 		</cftry>
 	</cffunction>

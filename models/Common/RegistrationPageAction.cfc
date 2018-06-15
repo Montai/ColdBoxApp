@@ -1,10 +1,17 @@
 <cfcomponent>
 	<cffunction name = "validateRegistrationForm" returntype = "string" output = "true">
-		<cfquery name = "getEmail" datasource = "cfartgallery">
-			SELECT EMAILID
-			FROM Users
-			WHERE EMAILID = '#form.emailId#'
-		</cfquery>
+		<cftry>
+			<cfquery name = "getEmail" datasource = "cfartgallery">
+				SELECT EMAILID
+				FROM Users
+				WHERE EMAILID = '#form.emailId#'
+			</cfquery>
+		<cfcatch type = "any">
+			<!--- <cflocation  url = "/Common/OnError"> --->
+			<cfreturn "Email already exists">
+		</cfcatch>
+		</cftry>
+		
 
 		<cfif not isValid("regex", form.firstName, "^[a-zA-Z]*$")>
 			<cfreturn "Invalid First Name">
@@ -32,7 +39,7 @@
 		<cfreturn "true">
 	</cffunction>
 
-	<cffunction name = "insertDataRegistrationForm" returntype = "boolean" output = "true">
+	<cffunction name = "insertDataRegistrationForm" returntype = "boolean" output = "false">
 		<!--- <cfargument name = "firstName" type = "string" required = "true"> --->
 <!--- 		<cfargument name = "middleName" type = "string" required = "false"> --->
 <!--- 		<cfargument name = "lastName" type = "string" required = "true"> --->
@@ -47,13 +54,16 @@
 		<cfset variables.salt = Hash(GenerateSecretKey("AES"), "SHA-512") />
 		<cfset variables.hashedPassword = Hash(form.password & variables.salt, "SHA-512") />
 		<!--- insert both variables.salt and variables.hashedPassword into table --->
-
-		<cfquery name = "insertData" datasource = "cfartgallery">
-			INSERT INTO Users(FIRSTNAME, MIDDLENAME, LASTNAME, GENDER, DATEOFBIRTH, ADDRESS, PHONENUMBER, EMAILID, PASSWORD, CONFIRMPASSWORD, SALT)
-			VALUES ('#form.firstName#','#form.middleName#', '#form.lastName#', '#form.userGender#', '#form.birthDate#', '#form.address#', '#form.phoneNumber#',
-			'#form.emailId#','#variables.hashedPassword#', '#variables.hashedPassword#', '#variables.salt#')
-		</cfquery>
-
+		<cftry>
+			<cfquery name = "insertData" datasource = "cfartgallery">
+				INSERT INTO Users(FIRSTNAME, MIDDLENAME, LASTNAME, GENDER, DATEOFBIRTH, ADDRESS, PHONENUMBER, EMAILID, PASSWORD, CONFIRMPASSWORD, SALT)
+				VALUES ('#form.firstName#','#form.middleName#', '#form.lastName#', '#form.userGender#', '#form.birthDate#', '#form.address#', '#form.phoneNumber#',
+				'#form.emailId#','#variables.hashedPassword#', '#variables.hashedPassword#', '#variables.salt#')
+			</cfquery>
+			<cfcatch type = "any">
+				<cflocation  url = "/Common/OnError">
+			</cfcatch>
+		</cftry>
 		<cfreturn true>
 	</cffunction>
 </cfcomponent>
