@@ -69,7 +69,7 @@ component{
 	}
 
 	function onError( any Exception, string EventName ) {
-	WRITEDUMP(ARGUMENTS); abort;
+		WRITEDUMP(ARGUMENTS); abort;
 	}
 
 }

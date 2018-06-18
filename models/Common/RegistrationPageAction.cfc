@@ -1,4 +1,4 @@
-<cfcomponent>
+<cfcomponent name = "Registration Page Action" hint = "Validates Reg form and insert data in db">
 	<cffunction name = "validateRegistrationForm" returntype = "string" output = "true">
 		<cftry>
 			<cfquery name = "getEmail" datasource = "cfartgallery">

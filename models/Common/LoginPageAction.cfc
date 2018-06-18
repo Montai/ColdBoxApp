@@ -1,4 +1,4 @@
-<cfcomponent>
+<cfcomponent name = "LoginAction" hint = "Validates and insert data in db">
 	<cffunction name = "ValidateLoginForm" returntype = "boolean" output = "false">
 		<cfargument name = "email" type = "string" required = "true">
 		<cfargument name = "password" type = "string" required = "true">
