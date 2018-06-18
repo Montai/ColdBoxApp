@@ -39,7 +39,7 @@ component name = "Common" hint = "Common Controller for handling basic operation
 	}
 
 	/**
-	* loginaction
+	* Login Action
 	*/
 	public void function LoginAction( event, rc, prc ){
 		// writedump(form);

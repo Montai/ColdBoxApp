@@ -57,8 +57,17 @@
 		<cftry>
 			<cfquery name = "insertData" datasource = "cfartgallery">
 				INSERT INTO Users(FIRSTNAME, MIDDLENAME, LASTNAME, GENDER, DATEOFBIRTH, ADDRESS, PHONENUMBER, EMAILID, PASSWORD, CONFIRMPASSWORD, SALT)
-				VALUES ('#form.firstName#','#form.middleName#', '#form.lastName#', '#form.userGender#', '#form.birthDate#', '#form.address#', '#form.phoneNumber#',
-				'#form.emailId#','#variables.hashedPassword#', '#variables.hashedPassword#', '#variables.salt#')
+				VALUES (<cfqueryparam cfsqltype = "cf_sql_varchar" value = "#form.firstName#">,
+						<cfqueryparam cfsqltype = "cf_sql_varchar" value = "#form.middleName#">,
+						<cfqueryparam cfsqltype = "cf_sql_varchar" value = "#form.lastName#">,
+						<cfqueryparam cfsqltype = "cf_sql_varchar" value = "#form.userGender#">,
+						<cfqueryparam cfsqltype = "cf_sql_date" value = "#form.birthDate#">,
+						<cfqueryparam cfsqltype = "cf_sql_varchar" value = "#form.address#">,
+						<cfqueryparam cfsqltype = "cf_sql_varchar" value = "#form.phoneNumber#">,
+						<cfqueryparam cfsqltype = "cf_sql_varchar" value = "#form.emailId#">,
+						<cfqueryparam cfsqltype = "cf_sql_varchar" value = "#variables.hashedPassword#">,
+						<cfqueryparam cfsqltype = "cf_sql_varchar" value = "#variables.hashedPassword#">,
+						<cfqueryparam cfsqltype = "cf_sql_varchar" value = "#variables.salt#"> )
 			</cfquery>
 			<cfcatch type = "any">
 				<cflocation  url = "/Common/OnError">
