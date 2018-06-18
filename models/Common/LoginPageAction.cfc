@@ -1,5 +1,5 @@
 <cfcomponent name = "LoginAction" hint = "Validates and insert data in db">
-	<cffunction name = "ValidateLoginForm" returntype = "boolean" output = "false">
+	<cffunction name = "validateLoginForm" returntype = "boolean" output = "false">
 		<cfargument name = "email" type = "string" required = "true">
 		<cfargument name = "password" type = "string" required = "true">
 		<cfset variables.flag = true>
@@ -15,7 +15,7 @@
 		<cfreturn variables.flag>
 	</cffunction>
 
-	<cffunction name = "CheckFormData" returntype = "string" hint = "check credentials" output = "false">
+	<cffunction name = "checkFormData" returntype = "string" hint = "check credentials" output = "false">
 		<cfargument name = "email" type = "string" required = "true" />
 		<cfargument name = "password" type = "string" required = "true" />
 		<cftry>

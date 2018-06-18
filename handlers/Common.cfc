@@ -50,11 +50,11 @@ component name = "Common" hint = "Common Controller for handling basic operation
 			// local.myModel = getInstance("model.Common.LoginPageAction");
 			// abort;
 			local.myModel = getModel("Common.LoginPageAction");
-			local.validationStatus = myModel.ValidateLoginForm(form.emailId, form.password);
+			local.validationStatus = myModel.validateLoginForm(form.emailId, form.password);
 			//writedump(validationStatus);
 			//abort;
 			if(local.validationStatus EQ true) {
-				local.userFormData = myModel.CheckFormData(form.emailId, form.password);
+				local.userFormData = myModel.checkFormData(form.emailId, form.password);
 				if(local.userFormData EQ "true") {
 					//abort;
 					//location("../../index.cfm/Common/Home");
