@@ -41,11 +41,11 @@ component name = "Common" hint = "Common Controller for handling basic operation
 	/**
 	* Login Action
 	*/
-	public void function LoginAction( event, rc, prc ){
+	public void function LoginAction( event, rc, prc ) {
 		// writedump(form);
 		// writedump(Login);
 		// abort;
-		
+
 		if(isDefined("form.submit")) {
 			// local.myModel = getInstance("model.Common.LoginPageAction");
 			// abort;
@@ -135,10 +135,9 @@ component name = "Common" hint = "Common Controller for handling basic operation
 	}
 
 	/**
-	* On Error method 
+	* On Error method
 	*/
 	public void function OnError(event, rc, prc, message) {
-		//writeDump(message); abort;
 		log.warn("#message#");
 		event.paramValue("error", message);
 		event.setView("Common/OnError").noLayout();

@@ -1,7 +1,7 @@
 <cfcomponent name = "Registration Page Action" hint = "Validates Reg form and insert data in db">
-	<cffunction name = "validateRegistrationForm" returntype = "string" output = "true">
+	<cffunction name = "validateRegistrationForm" description = "Validate Registration Form" hint = "validates the registration form" returntype = "string" output = "true">
 		<cftry>
-			<cfquery name = "getEmail" datasource = "cfartgallery">
+			<cfquery name = "getEmail">
 				SELECT EMAILID
 				FROM Users
 				WHERE EMAILID = '#form.emailId#'
@@ -11,7 +11,7 @@
 			<cfreturn "Email already exists">
 		</cfcatch>
 		</cftry>
-		
+
 
 		<cfif not isValid("regex", form.firstName, "^[a-zA-Z]*$")>
 			<cfreturn "Invalid First Name">

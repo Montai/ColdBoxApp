@@ -33,7 +33,7 @@
 					</header>
 
 				<!-- Main -->
-					<section id="main">
+					<section id = "main">
 
 						<!-- Thumbnails -->
 							<section class="thumbnails">

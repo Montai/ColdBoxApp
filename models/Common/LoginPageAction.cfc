@@ -1,5 +1,5 @@
 <cfcomponent name = "LoginAction" hint = "Validates and insert data in db">
-	<cffunction name = "validateLoginForm" returntype = "boolean" output = "false">
+	<cffunction name = "validateLoginForm" description = "Check form values" hint = "Validate data" returntype = "boolean" output = "false">
 		<cfargument name = "email" type = "string" required = "true">
 		<cfargument name = "password" type = "string" required = "true">
 		<cfset variables.flag = true>
@@ -15,11 +15,11 @@
 		<cfreturn variables.flag>
 	</cffunction>
 
-	<cffunction name = "checkFormData" returntype = "string" hint = "check credentials" output = "false">
+	<cffunction name = "checkFormData" description = "Check the password" returntype = "string" hint = "check credentials" output = "false">
 		<cfargument name = "email" type = "string" required = "true" />
 		<cfargument name = "password" type = "string" required = "true" />
 		<cftry>
-			<cfquery name = "request.getPwdAndSalt" datasource = "cfartgallery">
+			<cfquery name = "request.getPwdAndSalt">
 				SELECT PASSWORD, SALT, ID
 				FROM Users
 				WHERE EMAILID = <cfqueryparam cfsqltype = "cf_sql_varchar" value = "#arguments.email#">
@@ -38,8 +38,7 @@
 			<cfif request.getPwdAndSalt.RecordCount NEQ 1>
 				<cfreturn "Invalid Email or Password">
 			</cfif>
-			<cfcatch type="any">
-				<!--- <cfoutput>Database exception occured</cfoutput> --->
+			<cfcatch type = "any">
 				<cfreturn "Opps, database exception occured">
 			</cfcatch>
 		</cftry>
