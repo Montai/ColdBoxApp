@@ -11,5 +11,6 @@
         </cflock>
     </cfif>
 </cfloop>
+<!--- <cfdump var = "varibles.sessionItems" abort = "yes"> --->
 <cflocation url = "../../index.cfm" addtoken = "false">
 

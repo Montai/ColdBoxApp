@@ -50,7 +50,7 @@
 				<tr>
 					<div class = "field">
 						<td>Address</td>
-						<td><cfinput type = "text" name = "address" class = "input-field" id = "address"></td>
+						<td><cftextarea name = "address" class = "input-field" id = "address"></cftextarea></td>
 						<td><div class = "errorfield" id = "addressError"></div></td>
 					</div>
 				</tr>

@@ -12,27 +12,32 @@
 		</cfcatch>
 		</cftry>
 
-
-		<cfif not isValid("regex", form.firstName, "^[a-zA-Z]*$")>
-			<cfreturn "Invalid First Name">
-		<cfelseif form.MiddleName NEQ "" and not isValid("regex", form.middleName, "^[a-zA-Z]*$")>
-			<cfreturn "Invalid Middle Name">
+		<cfif len(form.firstName) LTE 2 AND len(form.firstName) GTE 20>
+			<cfreturn "Name should contain atleast 2 and at max 20 characters">
+		<cfelseif not isValid("regex", form.firstName, "^[a-zA-Z]*$")>
+			<cfreturn "Invalid combination of letters">
+		<cfelseif len(form.middleName) LTE 2 AND len(form.middleName) GTE 20>
+			<cfreturn "Name should contain atleast 2 and at max 20 characters">
+		<cfelseif form.middleName NEQ "" and not isValid("regex", form.middleName, "^[a-zA-Z]*$")>
+			<cfreturn "Invalid combination of letters">
+		<cfelseif len(form.lastName) LTE 2 AND len(form.lastName) GTE 20>
+			<cfreturn "Name should contain atleast 2 and at max 20 characters">
 		<cfelseif not isValid("regex", form.lastName, "^[a-zA-Z]*$")>
-			<cfreturn "Invalid Last Name">
+			<cfreturn "Invalid combination of letters">
 		<cfelseif not (form.userGender EQ "male" or form.userGender EQ "female")>
 			<cfreturn "Invalid Gender">
 		<cfelseif not isValid("date", form.birthDate)>
 			<cfreturn "Invalid DateOfBirth">
 		<cfelseif not(len(form.address) GTE 10 AND len(form.address) LTE 100)>
-			<cfreturn "Invalid Address">
+			<cfreturn "Invalid Address, Address must be between 10 to 100 characters">
 		<cfelseif not(len(form.phoneNumber) EQ 10)>
-			<cfreturn "Invalid Phone Number">
+			<cfreturn "Phone Number should have 10 digits">
 		<cfelseif not isValid("email", form.emailId)>
 			<cfreturn "Invalid Email">
 		<cfelseif not "#getEmail.EMAILID#" EQ "">
 			<cfreturn "Email Already Exists">
 		<cfelseif not(len(form.password) GTE 6 AND len(form.password) LTE 20)>
-			<cfreturn "Invalid Password">
+			<cfreturn "Invalid Password, password must be between 6 to 20 characters">
 		<cfelseif not(len(form.confirmPassword) GTE 6 AND len(form.confirmPassword) LTE 20)>
 			<cfreturn "Invalid Confirm password">
 		</cfif>
@@ -55,7 +60,7 @@
 		<cfset variables.hashedPassword = Hash(form.password & variables.salt, "SHA-512") />
 		<!--- insert both variables.salt and variables.hashedPassword into table --->
 		<cftry>
-			<cfquery name = "insertData" datasource = "cfartgallery">
+			<cfquery name = "insertData">
 				INSERT INTO Users(FIRSTNAME, MIDDLENAME, LASTNAME, GENDER, DATEOFBIRTH, ADDRESS, PHONENUMBER, EMAILID, PASSWORD, CONFIRMPASSWORD, SALT)
 				VALUES (<cfqueryparam cfsqltype = "cf_sql_varchar" value = "#form.firstName#">,
 						<cfqueryparam cfsqltype = "cf_sql_varchar" value = "#form.middleName#">,
@@ -70,7 +75,7 @@
 						<cfqueryparam cfsqltype = "cf_sql_varchar" value = "#variables.salt#"> )
 			</cfquery>
 			<cfcatch type = "any">
-				<cflocation  url = "/Common/OnError">
+				<cfreturn false>
 			</cfcatch>
 		</cftry>
 		<cfreturn true>

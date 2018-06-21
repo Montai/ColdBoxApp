@@ -9,7 +9,7 @@
 	</head>
 	<body>
         <div class = "topnav">
-            <a href = "Login.cfm" onclick = "return confirm('Are you sure?')">Log Out</a>
+            <a href = "Logout.cfm" onclick = "return confirm('Are you sure?')">Log Out</a>
             <a href = "Home.cfm">Home Page</a>
         </div>
 		<!-- Wrapper -->
