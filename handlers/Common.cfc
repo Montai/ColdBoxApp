@@ -1,5 +1,5 @@
 /**
-* I am a new handler
+* Common handler
 */
 component name = "Common" hint = "Common Controller for handling basic operations" extends = "coldbox.system.EventHandler" {
 	//property name = "Login" inject;

@@ -1,3 +1,7 @@
+/** File Name: validateRegistrationForm.js
+ * Description: Does the client side validation of the Registration Form 
+ * 
+**/
 function validateForm() {
     var fname = document.getElementById("firstName").value;
     var mname = document.getElementById("middleName").value;

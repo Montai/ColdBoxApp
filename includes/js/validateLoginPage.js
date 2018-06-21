@@ -1,4 +1,6 @@
-
+/** File Name: validateLoginPage.js
+ *  Description: Does the client side validation for the login form
+**/
 function validForm() {
     this.defaultName = "Validate Login Form";
     this.emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[a-zA-Z]{2,4}$/;
