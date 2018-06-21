@@ -1,5 +1,10 @@
+<!--- File Name: LoginPageAction.cfc
+	  Description: It validates the login form and check form data --->
 <cfcomponent name = "LoginAction" hint = "Validates and insert data in db">
-	<cffunction name = "validateLoginForm" description = "Check form values" hint = "Validate data" returntype = "boolean" output = "false">
+	<!--- Function Name: validateLoginForm.cfc
+		  Description: Does the validation of form variables
+	--->
+	<cffunction name = "validateLoginForm" description = "Check form values" hint = "Validate data" returntype = "boolean" access = "public" output = "false">
 		<cfargument name = "email" type = "string" required = "true">
 		<cfargument name = "password" type = "string" required = "true">
 		<cfset variables.flag = true>
@@ -14,8 +19,10 @@
 		</cfif>
 		<cfreturn variables.flag>
 	</cffunction>
-
-	<cffunction name = "checkFormData" description = "Check the password" returntype = "string" hint = "check credentials" output = "false">
+	<!--- name: checkFormData 
+		  description: It find the matching password and check its existance in db
+	--->
+	<cffunction name = "checkFormData" description = "Check the password" returntype = "string" hint = "check credentials" access = "public" output = "false">
 		<cfargument name = "email" type = "string" required = "true" />
 		<cfargument name = "password" type = "string" required = "true" />
 		<cftry>

@@ -1,5 +1,10 @@
+<!-- Filename: RegistrationPageAction.cfc 
+	 Description: Validates the registration page and insert the data 
+	 date created: 11/6/18 -->
 <cfcomponent name = "Registration Page Action" hint = "Validates Reg form and insert data in db">
-	<cffunction name = "validateRegistrationForm" description = "Validate Registration Form" hint = "validates the registration form" returntype = "string" output = "true">
+	<!--- Method name: validate Registration form 
+		  Description: It provides the server side validation --->
+	<cffunction name = "validateRegistrationForm" hint = "validates the registration form" returntype = "string" access = "public" output = "false">
 		<cftry>
 			<cfquery name = "getEmail">
 				SELECT EMAILID
@@ -7,7 +12,6 @@
 				WHERE EMAILID = '#form.emailId#'
 			</cfquery>
 		<cfcatch type = "any">
-			<!--- <cflocation  url = "/Common/OnError"> --->
 			<cfreturn "Email already exists">
 		</cfcatch>
 		</cftry>
@@ -44,7 +48,9 @@
 		<cfreturn "true">
 	</cffunction>
 
-	<cffunction name = "insertDataRegistrationForm" returntype = "boolean" output = "false">
+	<!--- Method name: insert data Registration form 
+		  description: Inserts the data in db --->
+	<cffunction name = "insertDataRegistrationForm" returntype = "boolean" access = "public" output = "false">
 		<!--- <cfargument name = "firstName" type = "string" required = "true"> --->
 <!--- 		<cfargument name = "middleName" type = "string" required = "false"> --->
 <!--- 		<cfargument name = "lastName" type = "string" required = "true"> --->

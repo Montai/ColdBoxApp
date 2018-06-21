@@ -1,3 +1,4 @@
+<!--- Showing the user defined error messages --->
 <h1>Exception Occured</h1>
 <cfoutput>
     <p> #encodeForHTML(rc.error)# </p>

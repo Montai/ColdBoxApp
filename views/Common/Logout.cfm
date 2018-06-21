@@ -1,4 +1,4 @@
-
+<!--- Logout.cfm --->
 <cflock scope = "Session" type = "Readonly" timeout = "20">
     <cfset variables.sessionItems = "#StructKeyList(Session)#">
 </cflock>
