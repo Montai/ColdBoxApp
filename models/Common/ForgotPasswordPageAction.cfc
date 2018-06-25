@@ -10,6 +10,9 @@
             <cfif form.emailId EQ "">
                 <cfreturn "Email is blank">
             </cfif>
+            <cfif NOT isValid("email", form.emailId)>
+                <cfreturn "Invalid email format. Email must be in format(abc@xyz.com)">
+            </cfif>
             <cfquery name = "checkUserEmail">
                 SELECT EMAILID
                 FROM Users 

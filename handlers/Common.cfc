@@ -1,6 +1,6 @@
 /**
 * File Name: Common.cfc
-  Description: This is the common component for handling all the basic actions
+  Description: This is the basic handler component for handling all the basic actions
 */
 component displayname = "Common" hint = "Common Controller for handling basic operations" extends = "coldbox.system.EventHandler" {
 	//property name = "Login" inject;
@@ -37,7 +37,6 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 	*/
 	public void function Login( event, rc, prc ) {
 		if(NOT StructIsEmpty(URL)) {
-			//writedump("#URL.error#");
 			local.errorMessages = "#URL.error#";
 			writeOutput(errorMessages);
 		}
@@ -70,7 +69,6 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 	*/
 	public void function Register( event, rc, prc ){
 		if(NOT StructIsEmpty(URL)) {
-			//writedump("#URL.error#");
 			local.errorMessages = "#URL.error#";
 			writeOutput(errorMessages);
 		}
@@ -81,7 +79,6 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 		if(isDefined("form.saveChanges")) {
 			local.formData = getModel("Common.RegistrationPageAction");
 			local.isValid = formData.validateRegistrationForm();
-			//writedump(isValid); abort;
 			if(arrayIsEmpty(isValid)) {
 				local.formDataInserted = formData.insertDataRegistrationForm(argumentCollection="form");
 				if(local.formDataInserted EQ true) {
@@ -107,7 +104,7 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 	*/
 	public void function ForgotPassword( event, rc, prc ) {
 		if(NOT StructIsEmpty(URL)) {
-			local.errorMessages = "#URL.error#";
+			local.errorMessages = "#URL.message#";
 			writeOutput(errorMessages);
 		}
 		event.setView( "Common/ForgotPassword" ).noLayout();
@@ -120,13 +117,13 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 			if(sendMail EQ "true") {
 				location("../../index.cfm?error=#"Email sent"#",true,301);
 			}
-			// else if(sendMail EQ "false") {
-			// 	local.message = "Unable to send mail";
-			// 	OnError(event, rc, prc, message);
-			// }
+			else if(sendMail EQ "false") {
+			 	local.message = "Unable to send mail";
+			 	OnError(event, rc, prc, message);
+			}
 			else {
 				error = sendMail;
-				location("../../index.cfm/Common/ForgotPassword?message=#"error"#",true,301);
+				location("../../index.cfm/Common/ForgotPassword?message=#error#",true,301);
 			}
 		} else {
 			local.message = "Error in submitting form";
