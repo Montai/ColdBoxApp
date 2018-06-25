@@ -88,9 +88,9 @@
 				</tr>
 			</table>
 		</cfform>
-		<a href = "../Common/Login.cfm">Click here to login</a>
+		<a href = "../../index.cfm">Click here to login</a>
 	</div>
 
-		
+
 	<script src = "../../includes/js/validateRegistrationForm.js"></script>
 </body>

@@ -8,7 +8,7 @@
 	<div class = "formcontainer">
 	<!--- Login form --->
 		<h5><u>Login</u></h5>
-		<cfform onsubmit = "return validateFormData()" action="index.cfm/Common/LoginAction" method = "post" name="submit">
+		<cfform onsubmit = "return validateFormData()" action = "index.cfm/Common/LoginAction" method = "post" name="submit">
 			<table>
 				<tr>
 					<div class = "field">
@@ -26,6 +26,7 @@
 				</tr>
 				<tr>
 					<td><cfinput type = "submit" name = "submit" class = "form-submit-button" id = "submit" value = "Login"></td>
+					<td><a href = "../coldboxapp/index.cfm/Common/ForgotPassword.cfm">Forgot Password</a></td>
 				</tr>
 			</table>
 		</cfform>

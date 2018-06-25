@@ -1,4 +1,8 @@
-﻿component{
+﻿/*
+File Name: Coldbox.cfc
+Description: Configure the settings for the coldbox application
+*/
+component displayname = "ConfigureColdbox" hint = "Configures the coldbox application"{
 
 	// Configure ColdBox Application
 	function configure(){
@@ -15,7 +19,7 @@
 
 			//Implicit Events
 			defaultEvent			= "Common.Login",
-		//	requestStartHandler		= "Main.onRequestStart",
+		 	requestStartHandler		= "Main.onRequestStart",
 			requestEndHandler		= "",
 		//	applicationStartHandler = "Main.onAppInit",
 			applicationEndHandler	= "",

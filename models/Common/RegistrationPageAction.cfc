@@ -1,10 +1,11 @@
-<!-- Filename: RegistrationPageAction.cfc 
-	 Description: Validates the registration page and insert the data 
-	 date created: 11/6/18 -->
-<cfcomponent name = "Registration Page Action" hint = "Validates Reg form and insert data in db">
-	<!--- Method name: validate Registration form 
-		  Description: It provides the server side validation --->
-	<cffunction name = "validateRegistrationForm" hint = "validates the registration form" returntype = "string" access = "public" output = "false">
+<!--- Filename: RegistrationPageAction.cfc
+	 Description: Validates the registration page and insert the data
+	 date created: 11/6/18 --->
+<cfcomponent displayname = "Registration Page Action" hint = "Validates Reg form and insert data in db">
+	<!--- Method name: validate Registration form
+		  Description: It does the server side validation --->
+	<cffunction name = "validateRegistrationForm" hint = "validates the registration form" returntype = "Array" access = "public" output = "false">
+		<cfset local.errorArray = ArrayNew(1)>
 		<cftry>
 			<cfquery name = "getEmail">
 				SELECT EMAILID
@@ -12,55 +13,72 @@
 				WHERE EMAILID = '#form.emailId#'
 			</cfquery>
 		<cfcatch type = "any">
-			<cfreturn "Email already exists">
+			<cfset arrayAppend(errorArray, "Email already exists, please login")>
 		</cfcatch>
 		</cftry>
-
-		<cfif len(form.firstName) LTE 2 AND len(form.firstName) GTE 20>
-			<cfreturn "Name should contain atleast 2 and at max 20 characters">
-		<cfelseif not isValid("regex", form.firstName, "^[a-zA-Z]*$")>
-			<cfreturn "Invalid combination of letters">
-		<cfelseif len(form.middleName) LTE 2 AND len(form.middleName) GTE 20>
-			<cfreturn "Name should contain atleast 2 and at max 20 characters">
-		<cfelseif form.middleName NEQ "" and not isValid("regex", form.middleName, "^[a-zA-Z]*$")>
-			<cfreturn "Invalid combination of letters">
-		<cfelseif len(form.lastName) LTE 2 AND len(form.lastName) GTE 20>
-			<cfreturn "Name should contain atleast 2 and at max 20 characters">
-		<cfelseif not isValid("regex", form.lastName, "^[a-zA-Z]*$")>
-			<cfreturn "Invalid combination of letters">
-		<cfelseif not (form.userGender EQ "male" or form.userGender EQ "female")>
-			<cfreturn "Invalid Gender">
-		<cfelseif not isValid("date", form.birthDate)>
-			<cfreturn "Invalid DateOfBirth">
-		<cfelseif not(len(form.address) GTE 10 AND len(form.address) LTE 100)>
-			<cfreturn "Invalid Address, Address must be between 10 to 100 characters">
-		<cfelseif not(len(form.phoneNumber) EQ 10)>
-			<cfreturn "Phone Number should have 10 digits">
-		<cfelseif not isValid("email", form.emailId)>
-			<cfreturn "Invalid Email">
-		<cfelseif not "#getEmail.EMAILID#" EQ "">
-			<cfreturn "Email Already Exists">
-		<cfelseif not(len(form.password) GTE 6 AND len(form.password) LTE 20)>
-			<cfreturn "Invalid Password, password must be between 6 to 20 characters">
-		<cfelseif not(len(form.confirmPassword) GTE 6 AND len(form.confirmPassword) LTE 20)>
-			<cfreturn "Invalid Confirm password">
+		<cfif form.firstName EQ "">
+			<cfset arrayAppend(errorArray, "First name is blank")>
 		</cfif>
-		<cfreturn "true">
+		<cfif form.lastName EQ "">
+			<cfset arrayAppend(errorArray, "Last name is blank")>
+		</cfif>
+		<cfif form.address EQ "">
+			<cfset arrayAppend(errorArray, "Address is blank")>
+		</cfif>
+		<cfif form.phoneNumber EQ "">
+			<cfset arrayAppend(errorArray, "Phone number is blank")>
+		</cfif>
+		<cfif form.emailId EQ "">
+			<cfset arrayAppend(errorArray, "Email id is blank")>
+		</cfif>
+		<cfif form.password EQ "">
+			<cfset arrayAppend(errorArray, "Password is blank")>
+		</cfif>
+		<cfif len(form.firstName) LTE 2 AND len(form.firstName) GTE 20>
+			<cfset arrayAppend(errorArray, "First name should contain atleast 2 and at max 20 characters")>
+		</cfif>
+		<cfif not isValid("regex", form.firstName, "^[a-zA-Z]*$")>
+			<cfset arrayAppend(errorArray, "First Name should contain only letters")>
+		</cfif>
+		<cfif form.middleName NEQ "" and not isValid("regex", form.middleName, "^[a-zA-Z]*$")>
+			<cfset arrayAppend(errorArray, "Middle Name should contain only letters")>
+		</cfif>
+		<cfif len(form.lastName) LTE 2 AND len(form.lastName) GTE 20>
+			<cfset arrayAppend(errorArray, "Last Name should contain only letters")>
+		</cfif>
+		<cfif not isValid("regex", form.lastName, "^[a-zA-Z]*$")>
+			<cfset arrayAppend(errorArray, "Last Name should contain only letters")>
+		</cfif>
+		<cfif not (form.userGender EQ "male" or form.userGender EQ "female")>
+			<cfset arrayAppend(errorArray, "Invalid Gender")>
+		</cfif>
+		<cfif not isValid("date", form.birthDate)>
+			<cfset arrayAppend(errorArray, "Choose a valid date of birth")>
+		</cfif>
+		<cfif not(len(form.address) GTE 10 AND len(form.address) LTE 100)>
+			<cfset arrayAppend(errorArray, "Address must be between 10 to 100 characters")>
+		</cfif>
+		<cfif not(len(form.phoneNumber) EQ 10)>
+			<cfset arrayAppend(errorArray, "Phone Number should have 10 digits")>
+		</cfif>
+		<cfif not isValid("email", form.emailId)>
+			<cfset arrayAppend(errorArray, "Invalid email format. Email format(abc@xyz.com)")>
+		</cfif>
+		<cfif not "#getEmail.EMAILID#" EQ "">
+			<cfset arrayAppend(errorArray, "Email already exists")>
+		</cfif>
+		<cfif not(len(form.password) GTE 6 AND len(form.password) LTE 20)>
+			<cfset arrayAppend(errorArray, "Invalid Password, password must be between 6 to 20 characters")>
+		</cfif>
+		<cfif not(len(form.confirmPassword) GTE 6 AND len(form.confirmPassword) LTE 20)>
+			<cfset arrayAppend(errorArray, "Invalid Confirm password, password must be between 6 to 20 characters")>
+		</cfif>
+		<cfreturn errorArray>
 	</cffunction>
 
-	<!--- Method name: insert data Registration form 
+	<!--- Method name: insert data Registration form
 		  description: Inserts the data in db --->
 	<cffunction name = "insertDataRegistrationForm" returntype = "boolean" access = "public" output = "false">
-		<!--- <cfargument name = "firstName" type = "string" required = "true"> --->
-<!--- 		<cfargument name = "middleName" type = "string" required = "false"> --->
-<!--- 		<cfargument name = "lastName" type = "string" required = "true"> --->
-<!--- 		<cfargument name = "gender" type = "string" required = "true"> --->
-<!--- 		<cfargument name = "dateOfBirth" type = "date" required = "true"> --->
-<!--- 		<cfargument name = "address" type = "string" required = "true"> --->
-<!--- 		<cfargument name = "phoneNumber" type = "string" required = "true"> --->
-<!--- 		<cfargument name = "email" type = "string" required = "true"> --->
-<!--- 		<cfargument name = "password" type = "string" required = "true"> --->
-<!--- 		<cfargument name = "confirmPassword" type = "string" required = "true"> --->
 
 		<cfset variables.salt = Hash(GenerateSecretKey("AES"), "SHA-512") />
 		<cfset variables.hashedPassword = Hash(form.password & variables.salt, "SHA-512") />
@@ -80,6 +98,9 @@
 						<cfqueryparam cfsqltype = "cf_sql_varchar" value = "#variables.hashedPassword#">,
 						<cfqueryparam cfsqltype = "cf_sql_varchar" value = "#variables.salt#"> )
 			</cfquery>
+			<cfmail from = "montai@domain.com" to = "saura.mandal1@gmail.com" subject = "My first email sent with ColdFusion">
+   				Hello, This is my first email sent with ColdFusion!
+			</cfmail>
 			<cfcatch type = "any">
 				<cfreturn false>
 			</cfcatch>

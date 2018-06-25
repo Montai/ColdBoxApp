@@ -1,7 +1,8 @@
 /**
-* Common handler
+* File Name: Common.cfc
+  Description: This is the common component for handling all the basic actions
 */
-component name = "Common" hint = "Common Controller for handling basic operations" extends = "coldbox.system.EventHandler" {
+component displayname = "Common" hint = "Common Controller for handling basic operations" extends = "coldbox.system.EventHandler" {
 	//property name = "Login" inject;
 	// OPTIONAL HANDLER PROPERTIES
 	this.prehandler_only 	= "";
@@ -35,6 +36,11 @@ component name = "Common" hint = "Common Controller for handling basic operation
 	* Login
 	*/
 	public void function Login( event, rc, prc ) {
+		if(NOT StructIsEmpty(URL)) {
+			//writedump("#URL.error#");
+			local.errorMessages = "#URL.error#";
+			writeOutput(errorMessages);
+		}
 		event.setView( "Common/Login" ).noLayout();
 	}
 
@@ -42,37 +48,20 @@ component name = "Common" hint = "Common Controller for handling basic operation
 	* Login Action
 	*/
 	public void function LoginAction( event, rc, prc ) {
-		// writedump(form);
-		// writedump(Login);
-		// abort;
-
 		if(isDefined("form.submit")) {
-			// local.myModel = getInstance("model.Common.LoginPageAction");
-			// abort;
 			local.myModel = getModel("Common.LoginPageAction");
-			local.validationStatus = myModel.validateLoginForm(form.emailId, form.password);
-			//writedump(validationStatus);
-			//abort;
-			if(local.validationStatus EQ true) {
-				local.userFormData = myModel.checkFormData(form.emailId, form.password);
-				if(local.userFormData EQ "true") {
-					//abort;
-					//location("../../index.cfm/Common/Home");
-					event.setView("Common/Home").noLayout();
-				} else {
-					//writeOutput("Opps! Email or Password is incorrect, Please provide the correct details");
-					//writeDump(event);
-					//abort;
-					local.message = local.userFormData;
-					//writeDump(message); abort;
-					OnError(event, rc, prc, message);
-					//event.setView("Common/OnError").noLayout();
-					//location("../../index.cfm/Common/Register","false","301");
-				}
+			local.validationStatus = myModel.validateLoginForm();
+			if(validationStatus[1] EQ "true"){
+				event.setView("Common/Home").noLayout();
+			} else { 
+				local.validationErr = "";
+				ArrayEach(local.validationStatus, function(error){
+       		      	validationErr = validationErr & error & '<br>';
+            	});
+				location("../../index.cfm?error=#validationErr#", true, 301);
 			}
 		} else {
 			event.setView("Common/Register").noLayout();
-			//location("../../index.cfm/Common/Register","false","301");
 		}
 	}
 
@@ -80,15 +69,20 @@ component name = "Common" hint = "Common Controller for handling basic operation
 	* Register
 	*/
 	public void function Register( event, rc, prc ){
+		if(NOT StructIsEmpty(URL)) {
+			//writedump("#URL.error#");
+			local.errorMessages = "#URL.error#";
+			writeOutput(errorMessages);
+		}
 		event.setView( "Common/Register" ).noLayout();
 	}
 
 	public void function RegisterAction(event, rc, prc) {
-		//writeDump(form); abort;
 		if(isDefined("form.saveChanges")) {
 			local.formData = getModel("Common.RegistrationPageAction");
 			local.isValid = formData.validateRegistrationForm();
-			if(local.isValid EQ "true") {
+			//writedump(isValid); abort;
+			if(arrayIsEmpty(isValid)) {
 				local.formDataInserted = formData.insertDataRegistrationForm(argumentCollection="form");
 				if(local.formDataInserted EQ true) {
 					location("../Common/Login");
@@ -96,9 +90,11 @@ component name = "Common" hint = "Common Controller for handling basic operation
 					location("../Common/Register");
 				}
 			} else {
-				local.message = local.isValid;
-				OnError(event, rc, prc, message);
-				//location("../Common/Register");
+				local.validationErr = "";
+				ArrayEach(local.isValid, function(error){
+       		      	validationErr = validationErr & error & '<br>';
+            	});
+				location("../../index.cfm/Common/Register?error=#validationErr#",true,301);
 			}
 		} else {
 			local.message = "Error in submitting form";
@@ -111,6 +107,17 @@ component name = "Common" hint = "Common Controller for handling basic operation
 	*/
 	public void function ForgotPassword( event, rc, prc ) {
 		event.setView( "Common/ForgotPassword" ).noLayout();
+	}
+
+	public void function ForgotPasswordAction(event, rc, prc) {
+		if(isDefined("form.submit")){
+			local.formData = getModel("Common.ForgotPasswordPageAction");
+			local.sendMail = formData.sendEmailToUser();
+			location("../../index.cfm?error=#"Email sent"#",true,301);
+		} else {
+			local.message = "Error in submitting form";
+			OnError(event, rc, prc, message);
+		}
 	}
 
 	/**

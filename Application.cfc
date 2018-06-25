@@ -1,9 +1,10 @@
 ﻿/**
-* Copyright 2005-2007 ColdBox Framework by Luis Majano and Ortus Solutions, Corp
-* www.ortussolutions.com
+File name: Application.cfc
+Component name: Application level component
+Description: This file handles the Lifecycle events of the entire flow of the application
 * ---
 */
-component{
+component displayname = "Application level component" hint = "Does all the application level settings" {
 	// Application properties
 	this.name = hash( getCurrentTemplatePath() );
 	this.sessionManagement = true;
@@ -12,12 +13,8 @@ component{
 	this.setClientCookies = true;
 	this.datasource = "cfartgallery";
 	this.mappings[ '/coldbox' ] = 'D:\MyCodings\Coding1\ColdBoxApp\coldbox\';
-	// Java Integration
-	this.javaSettings = {
-		loadPaths = [ ".\lib" ],
-		loadColdFusionClassPath = true,
-		reloadOnChange= false
-	};
+
+
 
 	// COLDBOX STATIC PROPERTY, DO NOT CHANGE UNLESS THIS IS NOT THE ROOT OF YOUR COLDBOX APP
 	COLDBOX_APP_ROOT_PATH = getDirectoryFromPath( getCurrentTemplatePath() );
@@ -45,7 +42,7 @@ component{
 		// Process ColdBox Request
 		application.cbBootstrap.onRequestStart( arguments.targetPage );
 		//writeDump(CGI); abort;
-		if(CGI.HTTP_URL EQ "/coldboxapp/index.cfm/Common/home") {
+		if(CGI.HTTP_URL EQ "/coldboxapp/index.cfm/Common/home" OR CGI.HTTP_URL EQ "/coldboxapp/index.cfm/Common/about") {
 			if(structKeyExists(session, "user")) {
 				location("/coldboxapp/index.cfm/Common/home");
 			}
@@ -60,15 +57,17 @@ component{
 		application.cbBootStrap.onSessionStart();
 	}
 
-	public void function onSessionEnd( struct sessionScope, struct appScope ){
+	public void function onSessionEnd(struct sessionScope, struct appScope){
 		arguments.appScope.cbBootStrap.onSessionEnd( argumentCollection=arguments );
 	}
 
-	public boolean function onMissingTemplate( template ){
-		return application.cbBootstrap.onMissingTemplate( argumentCollection=arguments );
+	public boolean function onMissingTemplate(template){
+		return application.cbBootstrap.onMissingTemplate(argumentCollection=arguments);
 	}
 
-	function onError( any Exception, string EventName ) {
+	function onError(any Exception, string EventName) {
+		//writelog("#this.name#","Application","","error",true);
+		writelog("Message: #Arguments.Exception.message#","Application","#This.Name#","error",true);
 		WRITEDUMP(ARGUMENTS); abort;
 	}
 
