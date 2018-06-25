@@ -1,13 +1,14 @@
 .formcontainer {
     position: relative;
     left: 15%;
-    border: 2px solid black;
+    border: 2px solid darkgreen;
     border-radius: 5px;
     padding: 3%;
     margin: 3%;
     width: 40%;
-    height: 250px;
-    background-color: rgb(201, 239, 252);
+    height: auto;
+    background-color: rgb(187, 247, 210);
+    overflow: hidden;
 }
 td {
     font-family: 'Roboto', sans-serif;
@@ -29,7 +30,7 @@ td {
 .form-submit-button {
     background: rgb(89, 162, 221);
     color: #fff;
-    border: 1px solid #eee;
+    border: 2px solid rgb(85, 29, 240);
     border-radius: 5px;
     box-shadow: 5px 5px 5px #eee;   
     text-shadow: none;
@@ -37,12 +38,12 @@ td {
     height: 40px;
 }
 div {
-    padding: 2%;
+    padding: 1%;
 }
 .form-submit-button:hover {
     background: #016ABC;
     color: #fff;
-    border: 1px solid #eee;
+    border: 2px solid rgb(85, 29, 240);
     border-radius: 5px;
     box-shadow: 5px 5px 5px #eee;
     text-shadow: none;

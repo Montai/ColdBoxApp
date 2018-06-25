@@ -1,4 +1,4 @@
-<!--- File name: Login.cfm 
+<!--- File name: Login.cfm
 	Description: It is the sign in page of the application
 --->
 <!DOCTYPE html>
@@ -12,20 +12,20 @@
     </div>
 	<div class = "formcontainer">
 	<!--- Login form --->
-		<h5><u>Login</u></h5>
+		<h2>Sign In</h2>
 		<cfform onsubmit = "return validateFormData()" action = "index.cfm/Common/LoginAction" method = "post" name="submit">
 			<table>
 				<tr>
 					<div class = "field">
 						<td>Email Id:</td>
-						<td><cfinput type = "text" name = "emailId" class = "input-field" id = "emailId"></td>
+						<td><cfinput type = "text" name = "emailId" class = "input-field" id = "emailId" placeholder = "Enter your email"></td>
 						<td><div class = "errorfield" id = "emailIdError"></div></td>
 					</div>
 				</tr>
 				<tr>
 					<div class = "field">
 						<td>Password:</td>
-						<td><cfinput type = "password" name = "password" class = "input-field" id = "password"></td>
+						<td><cfinput type = "password" name = "password" class = "input-field" id = "password" placeholder = "Enter your password"></td>
 						<td><div class = "errorfield" id = "passwordError"></div></td>
 					</div>
 				</tr>
@@ -37,11 +37,9 @@
 				</tr>
 			</table>
 		</cfform>
+		Not registered? Create an account <a href = "../coldboxapp/index.cfm/Common/Register.cfm">here</a>
 	</div>
 
-
-	<!---  Link to Signup page --->
-	<!--- <a href = "	../coldboxapp/index.cfm/Common/Register.cfm">Register Here</a> --->
 	<script src = "../../../coldboxapp/includes/js/validateLoginPage.js"></script>
 
 </body>

@@ -1,12 +1,14 @@
 .formcontainer {
     position: relative;
     left: 15%;
-    border: 2px solid black;
+    border: 2px solid rgb(59, 133, 218);
     border-radius: 5px;
     padding: 3%;
     margin: 3%;
     width: 40%;
+    height: auto;
     background-color: rgb(201, 239, 252);
+    overflow: hidden;
 }
 td {
     font-family: 'Roboto', sans-serif;
@@ -30,7 +32,6 @@ td {
     color: #fff;
     border: 1px solid #eee;
     border-radius: 5px;
-    box-shadow: 5px 5px 5px #eee;   
     text-shadow: none;
     width: 100px;
     height: 40px;
@@ -44,4 +45,7 @@ td {
     border-radius: 5px;
     box-shadow: 5px 5px 5px #eee;
     text-shadow: none;
+}
+select#UserGender.input-field {
+    width: 100%;
 }

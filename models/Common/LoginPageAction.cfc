@@ -21,8 +21,6 @@
 		<cfif NOT (arrayIsEmpty(errorArray))>
 			<cfreturn local.errorArray>
 		<cfelse>
-			<!--- <cfdump var = "#errorArray#" abort = "false"> --->
-			<!--- <cfset local.myModel = getModel("Common.LoginPageAction") > --->
 			<cfset local.userFormData = checkFormData() >
 			<cfif local.userFormData EQ "true">
 				<cfset arrayAppend(errorArray, "true")>
@@ -34,7 +32,7 @@
 		</cfif>
 		
 	</cffunction>
-	<!--- name: checkFormData
+	<!--- Function name: checkFormData
 		  description: It find the matching password and check its existance in db
 	--->
 	<cffunction name = "checkFormData" description = "Check the password" returntype = "string" hint = "check credentials" access = "public" output = "false">
@@ -51,7 +49,7 @@
 					<cfset Session.user = request.getPwdAndSalt.ID >
 					<cfreturn "true">
 				<cfelse>
-					<cfreturn "User Name doesn't exist. Create a new one">
+					<cfreturn "Wrong password or User Name doesn't exist. Create a new one">
 				</cfif>
 			</cfif>
 			<cfif request.getPwdAndSalt.RecordCount NEQ 1>

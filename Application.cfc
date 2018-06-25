@@ -8,13 +8,11 @@ component displayname = "Application level component" hint = "Does all the appli
 	// Application properties
 	this.name = hash( getCurrentTemplatePath() );
 	this.sessionManagement = true;
-	this.applicationTimeout = createTimeSpan(0,1,0,0);
-	this.sessionTimeout = createTimeSpan(0,0,30,0);
+	this.applicationTimeout = createTimeSpan(0,0,30,0);
+	this.sessionTimeout = createTimeSpan(0,0,10,0);
 	this.setClientCookies = true;
 	this.datasource = "cfartgallery";
 	this.mappings[ '/coldbox' ] = 'D:\MyCodings\Coding1\ColdBoxApp\coldbox\';
-
-
 
 	// COLDBOX STATIC PROPERTY, DO NOT CHANGE UNLESS THIS IS NOT THE ROOT OF YOUR COLDBOX APP
 	COLDBOX_APP_ROOT_PATH = getDirectoryFromPath( getCurrentTemplatePath() );
@@ -41,8 +39,8 @@ component displayname = "Application level component" hint = "Does all the appli
 	public boolean function onRequestStart( string targetPage ){
 		// Process ColdBox Request
 		application.cbBootstrap.onRequestStart( arguments.targetPage );
-		//writeDump(CGI); abort;
-		if(CGI.HTTP_URL EQ "/coldboxapp/index.cfm/Common/home" OR CGI.HTTP_URL EQ "/coldboxapp/index.cfm/Common/about") {
+		if(CGI.HTTP_URL EQ "/coldboxapp/index.cfm/Common/home" OR CGI.HTTP_URL EQ "/coldboxapp/index.cfm/Common/about" OR CGI.HTTP_URL EQ "/coldboxapp/index.cfm/Common/logout"
+		OR CGI.HTTP_URL EQ "/coldboxapp/index.cfm/Common/OnError") {
 			if(structKeyExists(session, "user")) {
 				location("/coldboxapp/index.cfm/Common/home");
 			}
@@ -58,7 +56,7 @@ component displayname = "Application level component" hint = "Does all the appli
 	}
 
 	public void function onSessionEnd(struct sessionScope, struct appScope){
-		arguments.appScope.cbBootStrap.onSessionEnd( argumentCollection=arguments );
+		arguments.appScope.cbBootStrap.onSessionEnd(argumentCollection=arguments);
 	}
 
 	public boolean function onMissingTemplate(template){
@@ -68,7 +66,13 @@ component displayname = "Application level component" hint = "Does all the appli
 	function onError(any Exception, string EventName) {
 		//writelog("#this.name#","Application","","error",true);
 		writelog("Message: #Arguments.Exception.message#","Application","#This.Name#","error",true);
-		WRITEDUMP(ARGUMENTS); abort;
+		writeLog("Root Cause Message: #Arguments.Exception.rootcause.message#","Application","#This.Name#","error",true);
+		writeOutput("<h2>An unexpected error occurred.</h2> 
+					<p>Please provide the following information to technical support:</p> 
+					<p>Error Event: #Arguments.EventName#</p> 
+					<p>Error details:<br>");
+		writeDump(Arguments.Exception); 
+		//WRITEDUMP(ARGUMENTS); abort;
 	}
 
 }

@@ -1,4 +1,4 @@
-<!--- File name: Register.cfm 
+<!--- File name: Register.cfm
 	Description: It is the view page for registration
 --->
 <!DOCTYPE html>
@@ -8,6 +8,7 @@
 </head>
 <body>
 	<div class = "formcontainer">
+		<h2>Sign Up</h2>
 		<cfform name = "registrationForm" action = "../Common/RegisterAction" onsubmit = "return validateForm()" method = "post">
 			<table>
 				<tr>

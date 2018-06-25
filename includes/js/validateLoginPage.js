@@ -47,11 +47,12 @@ validForm.prototype.isValid = function() {
         this.setDataError(error, elementId);
         flag = false;
         return flag;
-    } else {
+    } 
+    else {
         document.getElementById("emailIdError").innerHTML = "";
     }
     if(this.emailRegex.test(userEmail) == false) {
-        error = "Check proper e-mail format";
+        error = "Check proper e-mail format, Proper email format is:(abc@domain.com)";
         elementId = "emailIdError";
         this.setDataError(error, elementId);
         flag = false;
@@ -67,7 +68,7 @@ validForm.prototype.isValid = function() {
          document.getElementById("passwordError").innerHTML = "";
     }
     if(this.passwordRegex.test(userPassword) == false) {
-         error = "Check proper password format";
+         error = "Password should contain either combination of alphabets, or digits or special characters. It should be at least 6 and at max 20 characters";
          elementId = "passwordError";
          this.setDataError(error, elementId);
          flag = false;
@@ -79,33 +80,3 @@ function validateFormData() {
     var form = new validForm();
     return form.isValid();
 }
-// function validateFormData() {
-//     var emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[a-zA-Z]{2,4}$/;
-//     var passwordRegex = /^[a-zA-Z0-9!@#$%^&*]{6,20}$/;
-
-//     var email = document.getElementById("emailId").value;
-//     var password = document.getElementById("password").value;
-
-//     if(email == "") {
-//         document.getElementById("emailIdError").innerHTML = "Email can't be blank";
-//         return false;
-//     } else {
-//         document.getElementById("emailIdError").innerHTML = "";
-//     }
-//     if(emailRegex.test(email) == false) {
-//         document.getElementById("emailIdError").innerHTML = "Please enter a valid email id";
-//         return false;
-//     }
-//     if(password == "") {
-//         document.getElementById("passwordError").innerHTML = "Password can't be blank";
-//         return false;
-//     }
-//     else {
-//         document.getElementById("passwordError").innerHTML = "";
-//     }
-//     if(passwordRegex.test(password) == false) {
-//         document.getElementById("passwordError").innerHTML = "Enter correct combination of alphabets, numbers or special char";
-//         return false;
-//     }
-//     return true;
-// }

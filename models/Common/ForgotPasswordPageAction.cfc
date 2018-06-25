@@ -15,27 +15,33 @@
             </cfif>
             <cfquery name = "checkUserEmail">
                 SELECT EMAILID
-                FROM Users 
-                WHERE EMAILID = <cfqueryparam cfsqltype = "cf_sql_varchar" value = "#form.emailId#"> 
+                FROM Users
+                WHERE EMAILID = <cfqueryparam cfsqltype = "cf_sql_varchar" value = "#form.emailId#">
             </cfquery>
             <cfif checkUserEmail.RecordCount EQ 0>
                 <cfreturn "No such email exist, please try again">
             </cfif>
-            <cfset var result="">
-            <cfset var i=0>
+            <cfset var result = "">
+            <cfset var i = 0>
 
             <!--- Create string --->
-            <cfloop index="i" from="1" to="#20#">
+            <cfloop index="i" from="1" to="#10#">
                 <!--- Random character in range A-Z --->
                 <cfset result = result & Chr(RandRange(65, 90))>
             </cfloop>
             <!--- Send mail to user --->
-            <cfmail  from = "from@smtp.com"  subject = "Send email to user"  to = "#form.emailId#">
+            <cfmail  from = "montai@domain.com"  subject = "Send email to user"  to = "#form.emailId#" server = "smtp.gmail.com" port = "587">
                 Email sent successfully!
+                <html>
+                    <p>Your new password is: <cfoutput>"#result#"</cfoutput></p>
+                </html>
             </cfmail>
+            <!--- Encrypt the password --->
+            <cfset local.salt = Hash(GenerateSecretKey("AES"), "SHA-512") />
+		    <cfset local.hashedPassword = Hash("#result#" & salt, "SHA-512") />
             <cfquery name = "insertNewPassword">
                 UPDATE Users
-                SET PASSWORD = <cfqueryparam cfsqltype = "cf_sql_varchar" value = "#result#">
+                SET PASSWORD = <cfqueryparam cfsqltype = "cf_sql_varchar" value = "#hashedPassword#">
                 WHERE EMAILID = <cfqueryparam cfsqltype = "cf_sql_varchar" value = "#form.emailId#">
             </cfquery>
             <cfreturn "true">

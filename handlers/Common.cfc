@@ -13,7 +13,6 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 	this.aroundHandler_except = "";
 	// REST Allowed HTTP Methods Ex: this.allowedMethods = {delete='POST,DELETE',index='GET'}
 	this.allowedMethods = {};
-
 	/**
 	IMPLICIT FUNCTIONS: Uncomment to use
 	function preHandler( event, rc, prc, action, eventArguments ){
@@ -33,20 +32,22 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 	*/
 
 	/**
-	* Login
+	* Method Name: Login
+	* Description: Sets the Login page view
 	*/
-	public void function Login( event, rc, prc ) {
+	public void function Login(event, rc, prc) {
 		if(NOT StructIsEmpty(URL)) {
 			local.errorMessages = "#URL.error#";
-			writeOutput(errorMessages);
+			writeOutput("<p>#errorMessages#</p>");
 		}
 		event.setView( "Common/Login" ).noLayout();
 	}
 
 	/**
-	* Login Action
+	* Method Name: Login Action
+	* Description: Performs and handles the action after submitting the login form
 	*/
-	public void function LoginAction( event, rc, prc ) {
+	public void function LoginAction(event, rc, prc) {
 		if(isDefined("form.submit")) {
 			local.myModel = getModel("Common.LoginPageAction");
 			local.validationStatus = myModel.validateLoginForm();
@@ -65,15 +66,22 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 	}
 
 	/**
-	* Register
+	* Method Name: Register
+	* Description: Sets the Register page view
 	*/
-	public void function Register( event, rc, prc ){
+	public void function Register(event, rc, prc) {
 		if(NOT StructIsEmpty(URL)) {
 			local.errorMessages = "#URL.error#";
-			writeOutput(errorMessages);
+			writeOutput("<h4>The following errors restricts the user:</h4>
+			<p>#errorMessages#</p>");
 		}
-		event.setView( "Common/Register" ).noLayout();
+		event.setView("Common/Register").noLayout();
 	}
+
+	/**
+	* Method name: Register Action
+	* Description: Performs and handles the action after submitting the registration form
+	**/
 
 	public void function RegisterAction(event, rc, prc) {
 		if(isDefined("form.saveChanges")) {
@@ -82,13 +90,13 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 			if(arrayIsEmpty(isValid)) {
 				local.formDataInserted = formData.insertDataRegistrationForm(argumentCollection="form");
 				if(local.formDataInserted EQ true) {
-					location("../Common/Login");
+					location("../..");
 				} else {
 					location("../Common/Register");
 				}
 			} else {
 				local.validationErr = "";
-				ArrayEach(local.isValid, function(error){
+				ArrayEach(local.isValid, function(error) {
        		      	validationErr = validationErr & error & '<br>';
             	});
 				location("../../index.cfm/Common/Register?error=#validationErr#",true,301);
@@ -100,18 +108,24 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 	}
 
 	/**
-	* ForgotPassword
+	* Method Name: ForgotPassword
+	* Description: Sets the forgot password view
 	*/
-	public void function ForgotPassword( event, rc, prc ) {
+	public void function ForgotPassword(event, rc, prc) {
 		if(NOT StructIsEmpty(URL)) {
 			local.errorMessages = "#URL.message#";
-			writeOutput(errorMessages);
+			writeOutput("<p>#errorMessages#</p>");
 		}
 		event.setView( "Common/ForgotPassword" ).noLayout();
 	}
 
+	/**
+	* Method Name: ForgotPasswordAction
+	* Description: Send mail and handles the action after submitting the ForgotPassword form
+	**/
+
 	public void function ForgotPasswordAction(event, rc, prc) {
-		if(isDefined("form.submit")){
+		if(isDefined("form.submit")) {
 			local.formData = getModel("Common.ForgotPasswordPageAction");
 			local.sendMail = formData.sendEmailToUser();
 			if(sendMail EQ "true") {
@@ -132,28 +146,32 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 	}
 
 	/**
-	* Home
+	* Method Name: Home
+	* Description:  It shows the home page of the application
 	*/
-	public void function Home( event, rc, prc ) {
-		event.setView( "Common/Home" ).noLayout();
+	public void function Home(event, rc, prc) {
+		event.setView("Common/Home").noLayout();
 	}
 
 	/**
-	* About
+	* Method Name: About
+	* Description: It shows the about page of the application
 	*/
-	public void function About( event, rc, prc ) {
+	public void function About(event, rc, prc) {
 		event.setView( "Common/About" ).noLayout();
 	}
 
 	/**
-	* Logout
+	* Method Name: Logout
+	* Description: It does the session handling 
 	*/
-	public void function Logout( event, rc, prc ) {
+	public void function Logout(event, rc, prc) {
 		event.setView( "Common/LogOut" ).noLayout();
 	}
 
 	/**
-	* On Error method
+	* Method name: OnError
+	* Description: Displays the exception thrown by the applicaition
 	*/
 	public void function OnError(event, rc, prc, message) {
 		log.warn("#message#");
@@ -161,4 +179,3 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 		event.setView("Common/OnError").noLayout();
 	}
 }
-
