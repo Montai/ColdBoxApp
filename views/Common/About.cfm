@@ -1,4 +1,6 @@
-<!--- About.cfm --->
+<!--- File name: About.cfm
+	Description: View page for about us
+--->
 <!DOCTYPE HTML>
 <html>
 	<head>

@@ -1,4 +1,6 @@
-<!--- Home.cfm --->
+<!--- File name: Home.cfm 
+	Description: It is the home page of the application
+--->
 <!DOCTYPE HTML>
 <html>
 	<head>

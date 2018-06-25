@@ -1,4 +1,6 @@
-<!--- Showing the user defined error messages --->
+<!--- File name: OnError.cfc
+Description: Handles the error and shows it 
+--->
 <h1>Exception Occured</h1>
 <cfoutput>
     <p> #encodeForHTML(rc.error)# </p>

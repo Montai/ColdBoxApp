@@ -106,6 +106,10 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 	* ForgotPassword
 	*/
 	public void function ForgotPassword( event, rc, prc ) {
+		if(NOT StructIsEmpty(URL)) {
+			local.errorMessages = "#URL.error#";
+			writeOutput(errorMessages);
+		}
 		event.setView( "Common/ForgotPassword" ).noLayout();
 	}
 
@@ -113,7 +117,17 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 		if(isDefined("form.submit")){
 			local.formData = getModel("Common.ForgotPasswordPageAction");
 			local.sendMail = formData.sendEmailToUser();
-			location("../../index.cfm?error=#"Email sent"#",true,301);
+			if(sendMail EQ "true") {
+				location("../../index.cfm?error=#"Email sent"#",true,301);
+			}
+			// else if(sendMail EQ "false") {
+			// 	local.message = "Unable to send mail";
+			// 	OnError(event, rc, prc, message);
+			// }
+			else {
+				error = sendMail;
+				location("../../index.cfm/Common/ForgotPassword?message=#"error"#",true,301);
+			}
 		} else {
 			local.message = "Error in submitting form";
 			OnError(event, rc, prc, message);

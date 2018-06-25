@@ -1,4 +1,6 @@
-<!--- Register.cfm --->
+<!--- File name: Register.cfm 
+	Description: It is the view page for registration
+--->
 <!DOCTYPE html>
 <head>
  	<link rel="stylesheet" href = "../../includes/css/form_style.css">

@@ -44,7 +44,6 @@
 				FROM Users
 				WHERE EMAILID = <cfqueryparam cfsqltype = "cf_sql_varchar" value = "#form.emailid#">
 			</cfquery>
-			<!--- <cfdump var = "#request.getPwdAndSalt.RecordCount#" abort = "true"> --->
 			<!--- If the record exist in database --->
 			<cfif request.getPwdAndSalt.RecordCount EQ 1>
 				<cfif request.getPwdAndSalt.PASSWORD EQ Hash("#form.password#" & request.getPwdAndSalt.SALT, "SHA-512")>

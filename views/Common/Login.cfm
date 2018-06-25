@@ -1,10 +1,15 @@
-<!--- Login.cfm --->
+<!--- File name: Login.cfm 
+	Description: It is the sign in page of the application
+--->
 <!DOCTYPE html>
 <head>
 	<link rel = "stylesheet" href = "/coldboxapp/includes/css/login_page_style.css"/>
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel = "stylesheet">
 </head>
 <body>
+	<div class = "topnav">
+        <a href = "../coldboxapp/index.cfm/Common/Register.cfm">Sign Up</a>
+    </div>
 	<div class = "formcontainer">
 	<!--- Login form --->
 		<h5><u>Login</u></h5>
@@ -26,6 +31,8 @@
 				</tr>
 				<tr>
 					<td><cfinput type = "submit" name = "submit" class = "form-submit-button" id = "submit" value = "Login"></td>
+				</tr>
+				<tr>
 					<td><a href = "../coldboxapp/index.cfm/Common/ForgotPassword.cfm">Forgot Password</a></td>
 				</tr>
 			</table>
@@ -34,8 +41,7 @@
 
 
 	<!---  Link to Signup page --->
-	<h4>New User?</h4>
-	<a href = "	../coldboxapp/index.cfm/Common/Register.cfm">Register Here</a>
+	<!--- <a href = "	../coldboxapp/index.cfm/Common/Register.cfm">Register Here</a> --->
 	<script src = "../../../coldboxapp/includes/js/validateLoginPage.js"></script>
 
 </body>

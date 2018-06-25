@@ -1,6 +1,23 @@
-<cfcomponent displayname = "" hint = "">
+<!--- File name: ForgotPasswordPageAction.cfc
+    Description: Send a random password via mail to users account
+ --->
+<cfcomponent displayname = "Forgot Password Action" hint = "handles the forgot password">
+    <!--- Function name: sendEmailToUser
+          Description: User being asked to enter email, and password is being sent
+    --->
     <cffunction  name = "sendEmailToUser" returntype = "string" access = "public">
         <cftry>
+            <cfif form.emailId EQ "">
+                <cfreturn "Email is blank">
+            </cfif>
+            <cfquery name = "checkUserEmail">
+                SELECT EMAILID
+                FROM Users 
+                WHERE EMAILID = <cfqueryparam cfsqltype = "cf_sql_varchar" value = "#form.emailId#"> 
+            </cfquery>
+            <cfif checkUserEmail.RecordCount EQ 0>
+                <cfreturn "No such email exist, please try again">
+            </cfif>
             <cfset var result="">
             <cfset var i=0>
 
@@ -10,7 +27,7 @@
                 <cfset result = result & Chr(RandRange(65, 90))>
             </cfloop>
             <!--- Send mail to user --->
-            <cfmail  from = "from@smtp.com"  subject = "subject"  to = "#form.emailId#">
+            <cfmail  from = "from@smtp.com"  subject = "Send email to user"  to = "#form.emailId#">
                 Email sent successfully!
             </cfmail>
             <cfquery name = "insertNewPassword">

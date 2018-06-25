@@ -19,7 +19,7 @@ component displayname = "ConfigureColdbox" hint = "Configures the coldbox applic
 
 			//Implicit Events
 			defaultEvent			= "Common.Login",
-		 	requestStartHandler		= "Main.onRequestStart",
+		// 	requestStartHandler		= "Main.onRequestStart",
 			requestEndHandler		= "",
 		//	applicationStartHandler = "Main.onAppInit",
 			applicationEndHandler	= "",
