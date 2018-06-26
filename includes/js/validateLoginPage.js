@@ -46,34 +46,39 @@ validForm.prototype.isValid = function() {
         elementId = "emailIdError";
         this.setDataError(error, elementId);
         flag = false;
-        return flag;
     } 
     else {
-        document.getElementById("emailIdError").innerHTML = "";
+        if(this.emailRegex.test(userEmail) == false) {
+            error = "Check proper e-mail format, Proper email format is:(abc@domain.com)";
+            elementId = "emailIdError";
+            this.setDataError(error, elementId);
+            flag = false;
+            //return flag;
+        }
+        else {
+            document.getElementById("emailIdError").innerHTML = "";
+        }
     }
-    if(this.emailRegex.test(userEmail) == false) {
-        error = "Check proper e-mail format, Proper email format is:(abc@domain.com)";
-        elementId = "emailIdError";
-        this.setDataError(error, elementId);
-        flag = false;
-        return flag;
-    }
+    
+    
     if(this.isBlank(this.getPassword())) {
          error = "Password cannot be blank";
          elementId = "passwordError";
          this.setDataError(error, elementId);
          flag = false;
-         return flag;
-    } else {
-         document.getElementById("passwordError").innerHTML = "";
     }
-    if(this.passwordRegex.test(userPassword) == false) {
-         error = "Password should contain either combination of alphabets, or digits or special characters. It should be at least 6 and at max 20 characters";
-         elementId = "passwordError";
-         this.setDataError(error, elementId);
-         flag = false;
-         return flag;
-    }
+    else {
+        if(this.passwordRegex.test(userPassword) == false) {
+            error = "Password should contain either combination of alphabets, or digits or special characters. It should be at least 6 and at max 20 characters";
+            elementId = "passwordError";
+            this.setDataError(error, elementId);
+            flag = false;
+            //return flag;
+       }
+       else {
+        document.getElementById("passwordError").innerHTML = "";
+       }
+    } 
     return flag;
 };
 function validateFormData() {

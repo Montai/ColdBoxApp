@@ -99,7 +99,7 @@
 						<cfqueryparam cfsqltype = "cf_sql_varchar" value = "#variables.salt#"> )
 			</cfquery>
 			<cfmail from = "montai@domain.com" to = "saura.mandal1@gmail.com" subject = "My first email sent with ColdFusion">
-   				Hello, This is my first email sent with ColdFusion!
+   				Hello, This is my first email sent with ColdFusion! Please login back to continue.
 			</cfmail>
 			<cfcatch type = "any">
 				<cfreturn false>

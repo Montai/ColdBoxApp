@@ -6,10 +6,10 @@ Description: This file handles the Lifecycle events of the entire flow of the ap
 */
 component displayname = "Application level component" hint = "Does all the application level settings" {
 	// Application properties
-	this.name = hash( getCurrentTemplatePath() );
+	this.name = "hash( getCurrentTemplatePath() )";
 	this.sessionManagement = true;
 	this.applicationTimeout = createTimeSpan(0,0,30,0);
-	this.sessionTimeout = createTimeSpan(0,0,10,0);
+	this.sessionTimeout = createTimeSpan(0,0,25,0);
 	this.setClientCookies = true;
 	this.datasource = "cfartgallery";
 	this.mappings[ '/coldbox' ] = 'D:\MyCodings\Coding1\ColdBoxApp\coldbox\';
@@ -31,14 +31,14 @@ component displayname = "Application level component" hint = "Does all the appli
 	}
 
 	// application end
-	public void function onApplicationEnd( struct appScope ){
+	public void function onApplicationEnd(struct appScope){
 		arguments.appScope.cbBootstrap.onApplicationEnd( arguments.appScope );
 	}
 
 	// request start
-	public boolean function onRequestStart( string targetPage ){
+	public boolean function onRequestStart(string targetPage){
 		// Process ColdBox Request
-		application.cbBootstrap.onRequestStart( arguments.targetPage );
+		application.cbBootstrap.onRequestStart(arguments.targetPage);
 		if(CGI.HTTP_URL EQ "/coldboxapp/index.cfm/Common/home" OR CGI.HTTP_URL EQ "/coldboxapp/index.cfm/Common/about" OR CGI.HTTP_URL EQ "/coldboxapp/index.cfm/Common/logout"
 		OR CGI.HTTP_URL EQ "/coldboxapp/index.cfm/Common/OnError") {
 			if(structKeyExists(session, "user")) {
@@ -64,15 +64,18 @@ component displayname = "Application level component" hint = "Does all the appli
 	}
 
 	function onError(any Exception, string EventName) {
-		//writelog("#this.name#","Application","","error",true);
-		writelog("Message: #Arguments.Exception.message#","Application","#This.Name#","error",true);
-		writeLog("Root Cause Message: #Arguments.Exception.rootcause.message#","Application","#This.Name#","error",true);
-		writeOutput("<h2>An unexpected error occurred.</h2> 
-					<p>Please provide the following information to technical support:</p> 
-					<p>Error Event: #Arguments.EventName#</p> 
-					<p>Error details:<br>");
-		writeDump(Arguments.Exception); 
-		//WRITEDUMP(ARGUMENTS); abort;
+		//Message: #arguments.exception.message#<br />
+		//Details: #arguments.exception.detail#<br />
+		//Type: #arguments.exception.type#<br />
+		writelog("Message: #arguments.exception.message#","Application","#this.Name#","error",true);
+		writeLog("Root Cause Message: #arguments.exception.rootcause.message#","Application","#this.Name#","error",true);
+		writeLog("Details: #arguments.exception.type#");
+		writeLog("Message: #arguments.exception.detail#"); 
+		//writeOutput("<h2>An unexpected error occurred.</h2> 
+		//			<p>Please provide the following information to technical support:</p> 
+		//			<p>Error Event: #Arguments.EventName#</p> 
+		//			<p>Error details:<br>");
+		//writeDump(Arguments.Exception); 
 	}
 
 }

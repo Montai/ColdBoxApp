@@ -3,7 +3,8 @@
   Description: This is the basic handler component for handling all the basic actions
 */
 component displayname = "Common" hint = "Common Controller for handling basic operations" extends = "coldbox.system.EventHandler" {
-	//property name = "Login" inject;
+	property name = "LoginService" inject = "Login";
+	//property name = "Register" inject;
 	// OPTIONAL HANDLER PROPERTIES
 	this.prehandler_only 	= "";
 	this.prehandler_except 	= "";
@@ -35,7 +36,9 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 	* Method Name: Login
 	* Description: Sets the Login page view
 	*/
-	public void function Login(event, rc, prc) {
+	public void function Login(event, rc, prc) {	
+		//writeDump(LoginAction.checkFormData); abort;
+		writeDump(LoginService);
 		if(NOT StructIsEmpty(URL)) {
 			local.errorMessages = "#URL.error#";
 			writeOutput("<p>#errorMessages#</p>");
@@ -49,16 +52,23 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 	*/
 	public void function LoginAction(event, rc, prc) {
 		if(isDefined("form.submit")) {
+			//writeDump(LoginService); 
+			//writeDump(LoginService.validateLoginForm);
+			//abort;
 			local.myModel = getModel("Common.LoginPageAction");
+			//local.myModel = injector.getInstance("Common.LoginPageAction");
+			writeDump(LoginService.validateLoginForm); abort;
+			//local.myModel = LoginAction.checkFormData();
 			local.validationStatus = myModel.validateLoginForm();
-			if(validationStatus[1] EQ "true"){
+			//writeDump(validationStatus); abort;
+			if(validationStatus[1] EQ "true") {
 				event.setView("Common/Home").noLayout();
 			} else { 
 				local.validationErr = "";
 				ArrayEach(local.validationStatus, function(error){
        		      	validationErr = validationErr & error & '<br>';
             	});
-				location("../../index.cfm?error=#validationErr#", true, 301);
+				location("../../index.cfm?error=#validationErr#", false, 301);
 			}
 		} else {
 			event.setView("Common/Register").noLayout();
@@ -99,7 +109,7 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 				ArrayEach(local.isValid, function(error) {
        		      	validationErr = validationErr & error & '<br>';
             	});
-				location("../../index.cfm/Common/Register?error=#validationErr#",true,301);
+				location("../../index.cfm/Common/Register?error=#validationErr#",false,301);
 			}
 		} else {
 			local.message = "Error in submitting form";
@@ -129,7 +139,7 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 			local.formData = getModel("Common.ForgotPasswordPageAction");
 			local.sendMail = formData.sendEmailToUser();
 			if(sendMail EQ "true") {
-				location("../../index.cfm?error=#"Email sent"#",true,301);
+				location("../../index.cfm?error=#"Email sent"#",false,301);
 			}
 			else if(sendMail EQ "false") {
 			 	local.message = "Unable to send mail";
@@ -137,7 +147,7 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 			}
 			else {
 				error = sendMail;
-				location("../../index.cfm/Common/ForgotPassword?message=#error#",true,301);
+				location("../../index.cfm/Common/ForgotPassword?message=#error#",false,301);
 			}
 		} else {
 			local.message = "Error in submitting form";

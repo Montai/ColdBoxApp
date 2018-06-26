@@ -30,11 +30,8 @@
                 <cfset result = result & Chr(RandRange(65, 90))>
             </cfloop>
             <!--- Send mail to user --->
-            <cfmail  from = "montai@domain.com"  subject = "Send email to user"  to = "#form.emailId#" server = "smtp.gmail.com" port = "587">
-                Email sent successfully!
-                <html>
-                    <p>Your new password is: <cfoutput>"#result#"</cfoutput></p>
-                </html>
+            <cfmail  from = "montai@domain.com"  to = "#form.emailId#" subject = "Send email to user"  >
+                Email sent successfully! Your new password is: "#result#"
             </cfmail>
             <!--- Encrypt the password --->
             <cfset local.salt = Hash(GenerateSecretKey("AES"), "SHA-512") />
