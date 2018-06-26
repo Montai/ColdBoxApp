@@ -4,7 +4,8 @@
 */
 component displayname = "Common" hint = "Common Controller for handling basic operations" extends = "coldbox.system.EventHandler" {
 	property name = "LoginService" inject = "Login";
-	//property name = "Register" inject;
+	property name = "RegisterService" inject = "Register";
+
 	// OPTIONAL HANDLER PROPERTIES
 	this.prehandler_only 	= "";
 	this.prehandler_except 	= "";
@@ -37,8 +38,6 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 	* Description: Sets the Login page view
 	*/
 	public void function Login(event, rc, prc) {	
-		//writeDump(LoginAction.checkFormData); abort;
-		writeDump(LoginService);
 		if(NOT StructIsEmpty(URL)) {
 			local.errorMessages = "#URL.error#";
 			writeOutput("<p>#errorMessages#</p>");
@@ -52,14 +51,14 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 	*/
 	public void function LoginAction(event, rc, prc) {
 		if(isDefined("form.submit")) {
-			//writeDump(LoginService); 
+			//local.myModel = getModel("Common.LoginPageAction");
+			local.myModel = getInstance("Common.LoginPageAction");
+			//writeDump(myModel.validateLoginForm()); 
 			//writeDump(LoginService.validateLoginForm);
 			//abort;
-			local.myModel = getModel("Common.LoginPageAction");
-			//local.myModel = injector.getInstance("Common.LoginPageAction");
-			writeDump(LoginService.validateLoginForm); abort;
 			//local.myModel = LoginAction.checkFormData();
-			local.validationStatus = myModel.validateLoginForm();
+			local.validationStatus = LoginService.validateLoginForm();
+			//writedump("#local.validationStatus#"); abort;
 			//writeDump(validationStatus); abort;
 			if(validationStatus[1] EQ "true") {
 				event.setView("Common/Home").noLayout();
@@ -95,10 +94,10 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 
 	public void function RegisterAction(event, rc, prc) {
 		if(isDefined("form.saveChanges")) {
-			local.formData = getModel("Common.RegistrationPageAction");
-			local.isValid = formData.validateRegistrationForm();
+			local.formData = getInstance("Common.RegistrationPageAction");
+			local.isValid = RegisterService.validateRegistrationForm();
 			if(arrayIsEmpty(isValid)) {
-				local.formDataInserted = formData.insertDataRegistrationForm(argumentCollection="form");
+				local.formDataInserted = RegisterService.insertDataRegistrationForm(argumentCollection="form");
 				if(local.formDataInserted EQ true) {
 					location("../..");
 				} else {

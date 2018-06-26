@@ -5,8 +5,15 @@
 	<!--- Function Name: validateLoginForm.cfc
 		  Description: Does the validation of form variables	--->
 
-	<cffunction name = "validateLoginForm" description = "Check form values" hint = "Validate data" returntype = "Array" access = "public" output = "false">
+	<cffunction name = "validateLoginForm" 
+				description = "Check form values" 
+				hint = "Validate data" 
+				returntype = "any" 
+				access = "public" 
+				output = "false">
+		
 		<cfset local.errorArray = ArrayNew(1)>
+		
 		<cfif "#form.emailid#" EQ "">
 			<cfset arrayAppend(errorArray, "Email is blank")>
 		<cfelseif not isValid("email", "#form.emailid#")>

@@ -67,8 +67,8 @@ component displayname = "Application level component" hint = "Does all the appli
 		//Message: #arguments.exception.message#<br />
 		//Details: #arguments.exception.detail#<br />
 		//Type: #arguments.exception.type#<br />
-		writelog("Message: #arguments.exception.message#","Application","#this.Name#","error",true);
-		writeLog("Root Cause Message: #arguments.exception.rootcause.message#","Application","#this.Name#","error",true);
+		writelog("Message: #arguments.exception.message#");
+		writeLog("Root Cause Message: #arguments.exception.rootcause.message#");
 		writeLog("Details: #arguments.exception.type#");
 		writeLog("Message: #arguments.exception.detail#"); 
 		//writeOutput("<h2>An unexpected error occurred.</h2> 

@@ -23,11 +23,13 @@
     "installPaths":{
         "coldbox":"coldbox",
         "testbox":"testbox",
-        "wirebox":"wirebox"
+        "wirebox":"wirebox",
+        "logbox":"logbox"
     },
     "dependencies":{
         "coldbox":"5.0.0",
-        "wirebox":"^5.0.0+633"
+        "wirebox":"^5.0.0+633",
+        "logbox":"^5.0.0+633"
     },
     "scripts":{
         "postVersion":"package set location='https://github.com/coldbox-templates/advanced-script/archive/v`package version`.zip'",

@@ -81,6 +81,18 @@ component displayname = "ConfigureColdbox" hint = "Configures the coldbox applic
 			info = [ "coldbox.system" ]
 		};
 
+		// Define Appenders
+        logBox.appenders = {
+            console = { class="coldbox.system.logging.appenders.DummyAppender" }
+        };
+​
+        // Root Logger
+        logBox.root = {
+            levelmax="OFF",
+            levelMin="OFF",
+            appenders="*"
+        };
+
 		//Layout Settings
 		layoutSettings = {
 			defaultLayout = "",
