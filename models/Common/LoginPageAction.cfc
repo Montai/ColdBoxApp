@@ -1,19 +1,21 @@
 <!--- File Name: LoginPageAction.cfc
-	  Description: It validates the login form and check form data --->
+	  Description: It validates the login form and check form data
+	  Author: saura
+--->
 <cfcomponent displayname = "LoginAction" hint = "Validates and insert data in db">
 
 	<!--- Function Name: validateLoginForm.cfc
 		  Description: Does the validation of form variables	--->
 
-	<cffunction name = "validateLoginForm" 
-				description = "Check form values" 
-				hint = "Validate data" 
-				returntype = "any" 
-				access = "public" 
+	<cffunction name = "validateLoginForm"
+				description = "Check form values"
+				hint = "Validate data"
+				returntype = "any"
+				access = "public"
 				output = "false">
-		
+
 		<cfset local.errorArray = ArrayNew(1)>
-		
+
 		<cfif "#form.emailid#" EQ "">
 			<cfset arrayAppend(errorArray, "Email is blank")>
 		<cfelseif not isValid("email", "#form.emailid#")>
@@ -24,7 +26,7 @@
 		<cfelseif NOT(len("#form.password#") GTE 6 AND len("#form.password#") LTE 20)>
 			<cfset arrayAppend(errorArray, "Password must contain at least 6 and at most 20 characters long")>
 		</cfif>
-		
+
 		<cfif NOT (arrayIsEmpty(errorArray))>
 			<cfreturn local.errorArray>
 		<cfelse>
@@ -37,12 +39,17 @@
 				<cfreturn errorArray>
 			</cfif>
 		</cfif>
-		
+
 	</cffunction>
 	<!--- Function name: checkFormData
 		  description: It find the matching password and check its existance in db
 	--->
-	<cffunction name = "checkFormData" description = "Check the password" returntype = "string" hint = "check credentials" access = "public" output = "false">
+	<cffunction name = "checkFormData"
+				description = "Check the password"
+				returntype = "string"
+				hint = "check credentials"
+				access = "public"
+				output = "false">
 		<cftry>
 			<cfquery name = "request.getPwdAndSalt">
 				SELECT PASSWORD, SALT, ID
@@ -51,6 +58,7 @@
 			</cfquery>
 			<!--- If the record exist in database --->
 			<cfif request.getPwdAndSalt.RecordCount EQ 1>
+				<!--- Checking if password matches --->
 				<cfif request.getPwdAndSalt.PASSWORD EQ Hash("#form.password#" & request.getPwdAndSalt.SALT, "SHA-512")>
 					<!--- Setting user session --->
 					<cfset Session.user = request.getPwdAndSalt.ID >

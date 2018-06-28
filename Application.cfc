@@ -2,6 +2,7 @@
 File name: Application.cfc
 Component name: Application level component
 Description: This file handles the Lifecycle events of the entire flow of the application
+* Author: saura
 * ---
 */
 component displayname = "Application level component" hint = "Does all the application level settings" {
@@ -64,18 +65,21 @@ component displayname = "Application level component" hint = "Does all the appli
 	}
 
 	function onError(any Exception, string EventName) {
-		//Message: #arguments.exception.message#<br />
-		//Details: #arguments.exception.detail#<br />
-		//Type: #arguments.exception.type#<br />
-		writelog("Message: #arguments.exception.message#");
-		writeLog("Root Cause Message: #arguments.exception.rootcause.message#");
-		writeLog("Details: #arguments.exception.type#");
-		writeLog("Message: #arguments.exception.detail#"); 
-		//writeOutput("<h2>An unexpected error occurred.</h2> 
-		//			<p>Please provide the following information to technical support:</p> 
-		//			<p>Error Event: #Arguments.EventName#</p> 
+		var errorMessages = "<h2>An unexpected error occured. Error details:</h2>
+							Message: #arguments.exception.message#</br>
+							Root Cause Message: #arguments.exception.rootcause.message#</br>
+							Details: #arguments.exception.message#</br>
+							Message: #arguments.exception.detail#";
+		writelog(errorMessages,"Application",ErrorReport.txt,"error",true);
+		//writelog("Message: #arguments.exception.message#");
+		//writeLog("Root Cause Message: #arguments.exception.rootcause.message#");
+		//writeLog("Details: #arguments.exception.type#");
+		//writeLog("Message: #arguments.exception.detail#");
+		//writeOutput("<h2>An unexpected error occurred.</h2>
+		//			<p>Please provide the following information to technical support:</p>
+		//			<p>Error Event: #Arguments.EventName#</p>
 		//			<p>Error details:<br>");
-		//writeDump(Arguments.Exception); 
+		//writeDump(Arguments.Exception);
 	}
 
 }

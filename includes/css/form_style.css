@@ -9,9 +9,10 @@
     height: auto;
     background-color: rgb(201, 239, 252);
     overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
 }
 td {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     font-weight: 800;
 }
@@ -20,6 +21,7 @@ td {
     padding: 10px;
     border-radius: 2px;
     border: 2px solid skyblue;
+    font-family: 'Montserrat', sans-serif;
 }
 .errorfield {
     color: red;
@@ -37,6 +39,7 @@ td {
     height: 40px;
     position: relative;
     left: 250px;
+    font-family: 'Montserrat', sans-serif;
 }
 .form-submit-button:hover {
     background: #016ABC;

@@ -1,10 +1,15 @@
 <!--- Filename: RegistrationPageAction.cfc
 	 Description: Validates the registration page and insert the data
+	 Author: saura
 	 date created: 11/6/18 --->
 <cfcomponent displayname = "Registration Page Action" hint = "Validates Reg form and insert data in db">
 	<!--- Method name: validate Registration form
 		  Description: It does the server side validation --->
-	<cffunction name = "validateRegistrationForm" hint = "validates the registration form" returntype = "Array" access = "public" output = "false">
+	<cffunction name = "validateRegistrationForm"
+				hint = "validates the registration form"
+				returntype = "Array"
+				access = "public"
+				output = "false">
 		<cfset local.errorArray = ArrayNew(1)>
 		<cftry>
 			<cfquery name = "getEmail">
@@ -78,7 +83,10 @@
 
 	<!--- Method name: insert data Registration form
 		  description: Inserts the data in db --->
-	<cffunction name = "insertDataRegistrationForm" returntype = "boolean" access = "public" output = "false">
+	<cffunction name = "insertDataRegistrationForm"
+				returntype = "boolean"
+				access = "public"
+				output = "false">
 
 		<cfset variables.salt = Hash(GenerateSecretKey("AES"), "SHA-512") />
 		<cfset variables.hashedPassword = Hash(form.password & variables.salt, "SHA-512") />
@@ -98,8 +106,9 @@
 						<cfqueryparam cfsqltype = "cf_sql_varchar" value = "#variables.hashedPassword#">,
 						<cfqueryparam cfsqltype = "cf_sql_varchar" value = "#variables.salt#"> )
 			</cfquery>
-			<cfmail from = "montai@domain.com" to = "saura.mandal1@gmail.com" subject = "My first email sent with ColdFusion">
-   				Hello, This is my first email sent with ColdFusion! Please login back to continue.
+			<!--- Send a welcome e-mail --->
+			<cfmail from = "montai@domain.com" to = "saura.mandal1@gmail.com" subject = "Welcome email sent with ColdFusion">
+   				Hello, Your account has been created! Please login back to continue.
 			</cfmail>
 			<cfcatch type = "any">
 				<cfreturn false>

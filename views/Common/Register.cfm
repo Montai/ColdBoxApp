@@ -1,10 +1,11 @@
 <!--- File name: Register.cfm
 	Description: It is the view page for registration
+	Author: saura
 --->
 <!DOCTYPE html>
 <head>
- 	<link rel="stylesheet" href = "../../includes/css/form_style.css">
-	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link rel = "stylesheet" href = "/coldboxapp/includes/css/login_page_style.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 </head>
 <body>
 	<div class = "formcontainer">
@@ -91,7 +92,8 @@
 				</tr>
 			</table>
 		</cfform>
-		<a href = "../../index.cfm">Click here to login</a>
+
+		<br><a href = "../../index.cfm">Click here to login</a>
 	</div>
 
 

@@ -1,8 +1,11 @@
 ﻿/*
 File name: WireBox.cfc
 Description: This is the configuration file for the wirebox
+* Author: saura
 */
-component displayname = "Wirebox config" hint = "Config settings for wirebox" extends = "coldbox.system.ioc.config.Binder"{
+component displayname = "Wirebox config"
+		  hint = "Config settings for wirebox"
+		  extends = "coldbox.system.ioc.config.Binder" {
 
 	/**
 	* Configure WireBox, that's it!

@@ -1,5 +1,6 @@
 <!--- File name: ForgotPasswordPageAction.cfc
     Description: Send a random password via mail to users account
+	Author: saura
  --->
 <cfcomponent displayname = "Forgot Password Action" hint = "handles the forgot password">
     <!--- Function name: sendEmailToUser
@@ -30,7 +31,7 @@
                 <cfset result = result & Chr(RandRange(65, 90))>
             </cfloop>
             <!--- Send mail to user --->
-            <cfmail  from = "montai@domain.com"  to = "#form.emailId#" subject = "Send email to user"  >
+            <cfmail  from = "montai@domain.com"  to = "#form.emailId#" subject = "Send email to user">
                 Email sent successfully! Your new password is: "#result#"
             </cfmail>
             <!--- Encrypt the password --->
@@ -43,7 +44,7 @@
             </cfquery>
             <cfreturn "true">
         <cfcatch type = "exception">
-            <cfreturn "false">
+            <cfreturn "Unable to send mail">
         </cfcatch>
         </cftry>
     </cffunction>

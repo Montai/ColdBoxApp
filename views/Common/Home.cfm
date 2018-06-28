@@ -1,5 +1,6 @@
-<!--- File name: Home.cfm 
+<!--- File name: Home.cfm
 	Description: It is the home page of the application
+	Author: saura
 --->
 <!DOCTYPE HTML>
 <html>

@@ -1,15 +1,20 @@
-﻿component{
-	
+﻿/*
+File Name: Cachebox.cfc
+Description: Configure the cache settings for the coldbox application
+* Author: saura
+*/
+component{
+
 	/**
 	* Configure CacheBox for ColdBox Application Operation
 	*/
 	function configure(){
-		
+
 		// The CacheBox configuration structure DSL
 		cacheBox = {
 			// LogBox config already in coldbox app, not needed
-			// logBoxConfig = "coldbox.system.web.config.LogBox", 
-			
+			// logBoxConfig = "coldbox.system.web.config.LogBox",
+
 			// The defaultCache has an implicit name "default" which is a reserved cache name
 			// It also has a default provider of cachebox which cannot be changed.
 			// All timeouts are in minutes
@@ -25,7 +30,7 @@
 				objectStore = "ConcurrentStore", //guaranteed objects
 				coldboxEnabled = true
 			},
-			
+
 			// Register all the custom named caches you like here
 			caches = {
 				// Named cache for all coldbox event and view template caching
@@ -42,9 +47,9 @@
 						maxObjects = 300,
 						objectStore = "ConcurrentSoftReferenceStore" //memory sensitive
 					}
-				}		
-			}		
+				}
+			}
 		};
-	}	
+	}
 
 }

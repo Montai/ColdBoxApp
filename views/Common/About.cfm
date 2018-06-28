@@ -1,5 +1,6 @@
 <!--- File name: About.cfm
 	Description: View page for about us
+	Author: saura
 --->
 <!DOCTYPE HTML>
 <html>
@@ -30,7 +31,7 @@
 						</ul>
 					</header>
 
-				
+
 				<!-- Footer -->
 					<footer id="footer">
 						<p>&copy; Untitled. All rights reserved. Design: <a href="http://templated.co">TEMPLATED</a>. Demo Images: <a href="http://unsplash.com">Unsplash</a>.</p>

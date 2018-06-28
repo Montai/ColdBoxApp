@@ -1,5 +1,6 @@
 <!--- File name: OnError.cfc
-Description: Handles the error and shows it 
+Description: Handles the error and shows it
+Author: saura
 --->
 <h1>Exception Occured</h1>
 <cfoutput>

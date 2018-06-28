@@ -1,15 +1,13 @@
 <!--- File name: Login.cfm
 	Description: It is the sign in page of the application
+	Author: saura
 --->
 <!DOCTYPE html>
 <head>
 	<link rel = "stylesheet" href = "/coldboxapp/includes/css/login_page_style.css"/>
-	<link href="https://fonts.googleapis.com/css?family=Roboto" rel = "stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 </head>
 <body>
-	<div class = "topnav">
-        <a href = "../coldboxapp/index.cfm/Common/Register.cfm">Sign Up</a>
-    </div>
 	<div class = "formcontainer">
 	<!--- Login form --->
 		<h2>Sign In</h2>

@@ -2,9 +2,13 @@
 * File Name: Common.cfc
   Description: This is the basic handler component for handling all the basic actions
 */
-component displayname = "Common" hint = "Common Controller for handling basic operations" extends = "coldbox.system.EventHandler" {
+component displayname = "Common"
+		  hint = "Common Controller for handling basic operations"
+		  extends = "coldbox.system.EventHandler" {
+
 	property name = "LoginService" inject = "Login";
 	property name = "RegisterService" inject = "Register";
+
 
 	// OPTIONAL HANDLER PROPERTIES
 	this.prehandler_only 	= "";
@@ -17,7 +21,7 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 	this.allowedMethods = {};
 	/**
 	IMPLICIT FUNCTIONS: Uncomment to use
-	function preHandler( event, rc, prc, action, eventArguments ){
+	function preHandler(event, rc, prc, action, eventArguments){
 	}
 	function postHandler( event, rc, prc, action, eventArguments ){
 	}
@@ -37,8 +41,9 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 	* Method Name: Login
 	* Description: Sets the Login page view
 	*/
-	public void function Login(event, rc, prc) {	
-		if(NOT StructIsEmpty(URL)) {
+	public void function Login(event, rc, prc) {
+		logBox = getController().getLogBox();
+		if(StructKeyExists(URL,"error") EQ "YES") {
 			local.errorMessages = "#URL.error#";
 			writeOutput("<p>#errorMessages#</p>");
 		}
@@ -51,18 +56,10 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 	*/
 	public void function LoginAction(event, rc, prc) {
 		if(isDefined("form.submit")) {
-			//local.myModel = getModel("Common.LoginPageAction");
-			local.myModel = getInstance("Common.LoginPageAction");
-			//writeDump(myModel.validateLoginForm()); 
-			//writeDump(LoginService.validateLoginForm);
-			//abort;
-			//local.myModel = LoginAction.checkFormData();
 			local.validationStatus = LoginService.validateLoginForm();
-			//writedump("#local.validationStatus#"); abort;
-			//writeDump(validationStatus); abort;
 			if(validationStatus[1] EQ "true") {
 				event.setView("Common/Home").noLayout();
-			} else { 
+			} else {
 				local.validationErr = "";
 				ArrayEach(local.validationStatus, function(error){
        		      	validationErr = validationErr & error & '<br>';
@@ -79,7 +76,7 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 	* Description: Sets the Register page view
 	*/
 	public void function Register(event, rc, prc) {
-		if(NOT StructIsEmpty(URL)) {
+		if(StructKeyExists(URL,"error") EQ "YES") {
 			local.errorMessages = "#URL.error#";
 			writeOutput("<h4>The following errors restricts the user:</h4>
 			<p>#errorMessages#</p>");
@@ -94,7 +91,6 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 
 	public void function RegisterAction(event, rc, prc) {
 		if(isDefined("form.saveChanges")) {
-			local.formData = getInstance("Common.RegistrationPageAction");
 			local.isValid = RegisterService.validateRegistrationForm();
 			if(arrayIsEmpty(isValid)) {
 				local.formDataInserted = RegisterService.insertDataRegistrationForm(argumentCollection="form");
@@ -121,7 +117,7 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 	* Description: Sets the forgot password view
 	*/
 	public void function ForgotPassword(event, rc, prc) {
-		if(NOT StructIsEmpty(URL)) {
+		if(StructKeyExists(URL,"message") EQ "YES") {
 			local.errorMessages = "#URL.message#";
 			writeOutput("<p>#errorMessages#</p>");
 		}
@@ -140,8 +136,8 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 			if(sendMail EQ "true") {
 				location("../../index.cfm?error=#"Email sent"#",false,301);
 			}
-			else if(sendMail EQ "false") {
-			 	local.message = "Unable to send mail";
+			else if(sendMail EQ "Unable to send mail") {
+			 	local.message = sendMail;
 			 	OnError(event, rc, prc, message);
 			}
 			else {
@@ -172,7 +168,7 @@ component displayname = "Common" hint = "Common Controller for handling basic op
 
 	/**
 	* Method Name: Logout
-	* Description: It does the session handling 
+	* Description: It does the session handling
 	*/
 	public void function Logout(event, rc, prc) {
 		event.setView( "Common/LogOut" ).noLayout();
