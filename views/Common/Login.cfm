@@ -17,7 +17,15 @@
 					<div class = "field">
 						<td>Email Id:</td>
 						<td><cfinput type = "text" name = "emailId" class = "input-field" id = "emailId" placeholder = "Enter your email"></td>
-						<td><div class = "errorfield" id = "emailIdError"></div></td>
+						<td>
+							<div class = "errorfield" id = "emailIdError">
+								<cfif structKeyExists(URL, "error")>
+									<cfoutput>	
+										"#URL.error#"
+									</cfoutput>
+								</cfif>
+							</div>
+						</td>
 					</div>
 				</tr>
 				<tr>
@@ -27,9 +35,7 @@
 						<td><div class = "errorfield" id = "passwordError"></div></td>
 					</div>
 				</tr>
-				<tr>
-					<td><cfinput type = "submit" name = "submit" class = "form-submit-button" id = "submit" value = "Login"></td>
-				</tr>
+				<tr><td><cfinput type = "submit" name = "submit" class = "form-submit-button" id = "submit" value = "Login"></td></tr>
 				<tr>
 					<td><a href = "../coldboxapp/index.cfm/Common/ForgotPassword.cfm">Forgot Password</a></td>
 				</tr>

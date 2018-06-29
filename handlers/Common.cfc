@@ -76,9 +76,11 @@ component displayname = "Common"
 		public void function Login(event, rc, prc) {
 			if(StructKeyExists(URL,"error") EQ "YES") {
 				local.errorMessages = "#URL.error#";
-				writeOutput("<p>#errorMessages#</p>");
+				//prc.error = local.errorMessages;
+            	//event.setView(view="Common/Login", args={ error = local.errorMessages } );
+				//writeOutput("<p>#errorMessages#</p>");
 			}
-			event.setView( "Common/Login" ).noLayout();
+			event.setView("Common/Login").noLayout();
 		}
 
 		/**
@@ -126,7 +128,7 @@ component displayname = "Common"
 			if(isDefined("form.saveChanges")) {
 				local.isValid = RegisterService.validateRegistrationForm();
 				if(arrayIsEmpty(isValid)) {
-					local.formDataInserted = RegisterService.insertDataRegistrationForm(argumentCollection="form");
+					local.formDataInserted = RegisterService.insertDataRegistrationForm();
 					if(local.formDataInserted EQ true) {
 						location("../..");
 					} else {
