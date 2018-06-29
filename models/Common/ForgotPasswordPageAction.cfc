@@ -6,7 +6,11 @@
     <!--- Function name: sendEmailToUser
           Description: User being asked to enter email, and password is being sent
     --->
-    <cffunction  name = "sendEmailToUser" returntype = "string" access = "public">
+    <cffunction  name = "sendEmailToUser"
+				 returntype = "string"
+				 access = "public"
+				 hint = "On giving email, send password to their email"
+				 output = "false">
         <cftry>
             <cfif form.emailId EQ "">
                 <cfreturn "Email is blank">
@@ -26,7 +30,7 @@
             <cfset var i = 0>
 
             <!--- Create string --->
-            <cfloop index="i" from="1" to="#10#">
+            <cfloop index = "i" from = "1" to = "#10#">
                 <!--- Random character in range A-Z --->
                 <cfset result = result & Chr(RandRange(65, 90))>
             </cfloop>

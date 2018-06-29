@@ -29,5 +29,6 @@
 		</cfform>
 	</div>
 </body>
+<!-- Scripts -->
 <script src = "../../../coldboxapp/includes/js/validateForgotPassword.js"></script>
 </html>

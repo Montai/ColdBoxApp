@@ -96,6 +96,6 @@
 		<br><a href = "../../index.cfm">Click here to login</a>
 	</div>
 
-
+	<!-- Scripts -->
 	<script src = "../../includes/js/validateRegistrationForm.js"></script>
 </body>

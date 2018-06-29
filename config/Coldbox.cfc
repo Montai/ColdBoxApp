@@ -20,13 +20,14 @@ component displayname = "ConfigureColdbox" hint = "Configures the coldbox applic
 
 			//Implicit Events
 			defaultEvent			= "Common.Login",
+			onInvalidEvent 			= "Common.pageNotFound",
 		// 	requestStartHandler		= "Main.onRequestStart",
 			requestEndHandler		= "",
 		//	applicationStartHandler = "Main.onAppInit",
 			applicationEndHandler	= "",
 			sessionStartHandler 	= "",
 			sessionEndHandler		= "",
-			missingTemplateHandler	= "",
+			missingTemplateHandler	= "Common.missingTemplate",
 
 			//Extension Points
 			//applicationHelper 			= "includes/helpers/ApplicationHelper.cfm",
@@ -39,10 +40,10 @@ component displayname = "ConfigureColdbox" hint = "Configures the coldbox applic
 			controllerDecorator			= "",
 
 			//Error/Exception Handling
-			invalidHTTPMethodHandler 	= "",
-		//	exceptionHandler			= "main.onException",
-			invalidEventHandler			= "",
-			customErrorTemplate			= "",
+		//	invalidHTTPMethodHandler 	= "Common.onInvalidHTTPMethod",
+			exceptionHandler			= "Main.onException",
+			invalidEventHandler			= "Main.pageNotFound",
+			//customErrorTemplate			= "/includes/myCustomErrorPage.cfm",
 
 			//Application Aspects
 			handlerCaching 			= false,

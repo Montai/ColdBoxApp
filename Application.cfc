@@ -60,7 +60,7 @@ component displayname = "Application level component" hint = "Does all the appli
 		arguments.appScope.cbBootStrap.onSessionEnd(argumentCollection=arguments);
 	}
 
-	public boolean function onMissingTemplate(template){
+	public boolean function onMissingTemplate(template) {
 		return application.cbBootstrap.onMissingTemplate(argumentCollection=arguments);
 	}
 
@@ -70,8 +70,8 @@ component displayname = "Application level component" hint = "Does all the appli
 							Root Cause Message: #arguments.exception.rootcause.message#</br>
 							Details: #arguments.exception.message#</br>
 							Message: #arguments.exception.detail#";
-		writelog(errorMessages,"Application",ErrorReport.txt,"error",true);
-		//writelog("Message: #arguments.exception.message#");
+		//writelog(errorMessages,"Application",ErrorReport.txt,"error",true);
+		writelog("Message: #arguments.exception.message#");
 		//writeLog("Root Cause Message: #arguments.exception.rootcause.message#");
 		//writeLog("Details: #arguments.exception.type#");
 		//writeLog("Message: #arguments.exception.detail#");

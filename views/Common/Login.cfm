@@ -37,7 +37,7 @@
 		</cfform>
 		Not registered? Create an account <a href = "../coldboxapp/index.cfm/Common/Register.cfm">here</a>
 	</div>
-
+	<!-- Scripts -->
 	<script src = "../../../coldboxapp/includes/js/validateLoginPage.js"></script>
 
 </body>

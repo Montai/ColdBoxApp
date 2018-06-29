@@ -50,6 +50,7 @@ component displayname = "Wirebox config"
 		// Map Bindings below
 		map("Login").to("models.Common.LoginPageAction");
 		map("Register").to("models.Common.RegistrationPageAction");
+		map("ForgotPassword").to("models.Common.ForgotPasswordPageAction");
 		//mapDirectory("models.Common");
 	}
 
